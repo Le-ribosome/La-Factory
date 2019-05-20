@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import fr.example.formation.dao.IDAOUtilisateur;
 import fr.example.formation.model.Utilisateur;
+import fr.projet.lafactory.model.Personne;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
@@ -17,8 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 	IDAOPersonne daoPersonne;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Personne> opt=daoPersonne.findByIdWithRoles(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<Personne> opt=daoPersonne.findByIdWithDroits(email);
 		if(opt.isPresent()) {
 			return new CustomUserDetails(opt.get());
 		}

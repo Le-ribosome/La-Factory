@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import fr.example.formation.model.UserRole;
 import fr.example.formation.model.Utilisateur;
+import fr.projet.lafactory.model.Personne;
+import fr.projet.lafactory.model.PersonneDroit;
 
 public class CustomUserDetails implements UserDetails{
 
@@ -23,19 +25,23 @@ public class CustomUserDetails implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		for (PersonneDroit role : personne.getDroits()) {
-			authorities.add(new SimpleGrantedAuthority(role.getRole().toString()));
+			authorities.add(new SimpleGrantedAuthority(role.getDroit().toString()));
 		}
 		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
-		return personne.getPassword();
+		return personne.getMotDePasse();
 	}
 
 	@Override
 	public String getUsername() {
-		return personne.getUsername();
+		return null;
+	}
+	
+	public String getEmail() {
+		return personne.getEmail();
 	}
 
 	@Override
@@ -55,7 +61,7 @@ public class CustomUserDetails implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return personne.isEnable();
+		return true;
 	}
 
 }
