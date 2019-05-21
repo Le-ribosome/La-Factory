@@ -3,11 +3,14 @@ package fr.projet.lafactory.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -41,10 +44,9 @@ public class Matiere {
 	@Column(name="MAT_VERSION")
 	@Version
 	private int version;
-	
-	@ManyToMany
-	private List<Formateur> formateurs;
 
-	
+	@OneToMany(mappedBy="matiere")
+	private List<Enseignement> enseignements;
+
 	
 }
