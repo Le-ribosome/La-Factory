@@ -219,6 +219,56 @@ public class UserRestController {
             }
         }    
     }
+	
+	@PutMapping("/gestionnaire/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name="id") Integer id, @Valid @RequestBody Gestionnaire gestionnaire, BindingResult br) {
+        if (br.hasErrors()){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } else {
+            Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
+            if(opt.isPresent()) {
+                gestionnaire.setVersion(opt.get().getVersion());
+                gestionnaire.setId(id);
+                daoGestionnaire.save(gestionnaire);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }    
+    }
 
+	@PutMapping("/stagiaire/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name="id") Integer id, @Valid @RequestBody Stagiaire stagiaire, BindingResult br) {
+        if (br.hasErrors()){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } else {
+            Optional<Stagiaire> opt = daoStagiaire.findById(id);
+            if(opt.isPresent()) {
+                stagiaire.setVersion(opt.get().getVersion());
+                stagiaire.setId(id);
+                daoStagiaire.save(stagiaire);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }    
+    }
+	
+	@PutMapping("/technicien/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name="id") Integer id, @Valid @RequestBody Technicien technicien, BindingResult br) {
+        if (br.hasErrors()){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } else {
+            Optional<Technicien> opt = daoTechnicien.findById(id);
+            if(opt.isPresent()) {
+                technicien.setVersion(opt.get().getVersion());
+                technicien.setId(id);
+                daoTechnicien.save(technicien);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }    
+    }
 
 }
