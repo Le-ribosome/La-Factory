@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="ordinateur")
+@Table(name="Ordinateur")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="ORD_ID")),
 	@AttributeOverride(name="code", column=@Column(name="ORD_CODE")),
