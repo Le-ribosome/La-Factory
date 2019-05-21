@@ -6,25 +6,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.projet.lafactory.dao.IDAOFormateur;
+import fr.projet.lafactory.dao.IDAOOrdinateur;
 import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.dao.IDAOPersonneDroit;
+import fr.projet.lafactory.dao.IDAOSalle;
+import fr.projet.lafactory.dao.IDAOVideoprojecteur;
 import fr.projet.lafactory.model.Droit;
 import fr.projet.lafactory.model.Formateur;
+import fr.projet.lafactory.model.Ordinateur;
 import fr.projet.lafactory.model.Personne;
 import fr.projet.lafactory.model.PersonneDroit;
+import fr.projet.lafactory.model.Salle;
+import fr.projet.lafactory.model.Videoprojecteur;
 
 @Service
 public class ApplicationServiceConsole implements CommandLineRunner { // pour avoir accès à la console
 	
 	//pour le cryptage des mots de passes
-	@Autowired
-	private IDAOPersonne daoPersonne;
-	@Autowired
-	private IDAOPersonneDroit daoPersonneDroit;
-	@Autowired
-	private PasswordEncoder pass;
-	@Autowired
-	private IDAOFormateur daoFormateur;
+//	@Autowired
+//	private IDAOPersonne daoPersonne;
+//	@Autowired
+//	private IDAOPersonneDroit daoPersonneDroit;
+//	@Autowired
+//	private PasswordEncoder pass;
+//	@Autowired
+	
+//	private IDAOFormateur daoFormateur;
+//	@Autowired
+//	private IDAOVideoprojecteur daoVideoprojecteur;
+//	@Autowired
+//	private IDAOSalle daoSalle;
+//	@Autowired
+//	private IDAOOrdinateur daoOrdinateur;
 	
 	
 	@Override
@@ -33,10 +46,27 @@ public class ApplicationServiceConsole implements CommandLineRunner { // pour av
 		
 		Droit d = Droit.DROIT_ADMIN;
 		
-//		Formateur f = new Formateur();
-//		f.setEmail("formateur@formateur.fr");
-//		f.set
-		
+		//On crée du matériel
+//		Salle s = new Salle();
+//		s.setCapacite(12);
+//		s.setCode("SA01");
+//		s.setCoutJournee(30);
+//		daoSalle.save(s);
+//		
+//		Videoprojecteur vd = new Videoprojecteur();
+//		vd.setCode("VD01");
+//		vd.setCoutJournee(2);
+//		daoVideoprojecteur.save(vd);
+//		
+//		Ordinateur ordi = new Ordinateur();
+//		ordi.setAnneeAchat(2019);
+//		ordi.setCode("OR01");
+//		ordi.setCoutJournee(50);
+//		ordi.setProcesseur("processeur au hasard");
+//		ordi.setQuantiteRAM(4);
+//		ordi.setQuantiteDD(500);
+//		daoOrdinateur.save(ordi);
+				
 		//on crée les personnes avec leur mot de passe encrypté
 //		Personne p = new Personne();
 //		p.setEmail("marie@marie.fr");

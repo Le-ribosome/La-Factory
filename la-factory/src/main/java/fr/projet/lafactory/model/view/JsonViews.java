@@ -7,22 +7,16 @@ public class JsonViews {
 	public static class User {
 	}
 
-	public static class Gestionnaire {
+	public static class Gestionnaire extends User{
 	}
 
-	public static class Formateur {
+	public static class Formateur extends User{
 	}
 
-	public static class Stagiaire {
+	public static class Stagiaire extends User{
 	}
 
-	public static class StagiaireAvecFormation {
-	}
-
-	public static class StagiaireAvecOrdinateur {
-	}
-
-	public static class Technicien {
+	public static class Technicien extends User{
 	}
 
 	// --- Materiel ---
