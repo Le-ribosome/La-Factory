@@ -59,7 +59,7 @@ public class GestionnaireRestController {
 		}
 		daoGestionnaire.save(gestionnaire);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uCB.path("/rest/salle/{id}").buildAndExpand(gestionnaire.getId()).toUri());
+		headers.setLocation(uCB.path("/rest/gestionnaire/{id}").buildAndExpand(gestionnaire.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 

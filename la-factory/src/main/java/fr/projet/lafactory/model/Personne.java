@@ -14,40 +14,53 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Personne")
 @Inheritance(strategy= InheritanceType.JOINED)
 public class Personne {
 
+	@JsonView(JsonViews.User.class)
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="PER_ID")
 	private int id;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_NOM")
 	private String nom;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_PRENOM")
 	private String prenom;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_ADRESSE")
 	private String adresse;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_EMAIL")
 	@NotNull
 	private String email;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_TELEPHONE")
 	private String telephone;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_MOTDEPASSE")
 	@NotNull
 	private String motDePasse;
 
+	@JsonView(JsonViews.User.class)
 	@Column(name="PER_VERSION")
 	@Version
 	private int version;
 	
+	@JsonView(JsonViews.User.class)
 	@OneToMany(mappedBy="personne")
 	private List<PersonneDroit> droits;
 

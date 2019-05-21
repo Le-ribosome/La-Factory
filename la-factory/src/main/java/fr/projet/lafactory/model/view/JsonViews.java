@@ -10,6 +10,8 @@ public class JsonViews {
 	public static class Gestionnaire {
 	}
 	
+	public static class Formateur {
+	}
 	
 	public static class Stagiaire {
 	}
@@ -57,6 +59,18 @@ public static class Materiel {
 	}
 	
 	public static class MatiereAvecEnseignement {
+	}
+	
+	public static class Module {
+	}
+	
+	public static class ModuleAvecFormation {
+	}
+	
+	public static class ModuleAvecFormateur {
+	}
+	
+	public static class ModuleAvecMatiere {
 	}
 
 	
