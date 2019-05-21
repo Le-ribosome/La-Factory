@@ -8,8 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import fr.example.formation.model.UserRole;
-import fr.example.formation.model.Utilisateur;
 import fr.projet.lafactory.model.Personne;
 import fr.projet.lafactory.model.PersonneDroit;
 
