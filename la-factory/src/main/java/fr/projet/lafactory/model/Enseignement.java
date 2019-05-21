@@ -4,6 +4,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -14,10 +15,12 @@ public class Enseignement {
 	private EnseignementID id;
 
 	@ManyToOne()
+    @MapsId("ENS_FORMATEUR_ID")
 	@JoinColumn(name = "ENS_FORMATEUR_ID")
 	private Formateur formateur;
 
 	@ManyToOne()
+    @MapsId("ENS_MATIERE_ID")
 	@JoinColumn(name = "ENS_MATIERE_ID")
 	private Matiere matiere;
 
