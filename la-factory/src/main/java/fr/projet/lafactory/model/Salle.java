@@ -20,8 +20,8 @@ public class Salle extends Materiel {
 	@NotNull
 	private int capacite;
 
+	@OneToOne()
 	@JoinColumn(name = "SAL_VIDEOPROJECTEUR_ID", nullable = true)
-	@OneToOne(mappedBy = "salle")
 	private Videoprojecteur videoprojecteur;
 
 	public int getCapacite() {
