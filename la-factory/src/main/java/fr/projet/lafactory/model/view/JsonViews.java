@@ -13,11 +13,13 @@ public class JsonViews {
 	public static class StagiaireAvecFormation {
 	}
 	
+	public static class StagiaireAvecOrdinateur {
+	}
+	
 	// --- Materiel ---
 	
 	
 
-	
 	public static class Ordinateur {
 	}
 	
@@ -30,7 +32,6 @@ public class JsonViews {
 	public static class SalleAvecVideoprojecteur {
 	}
 	
-	
 	public static class Videoprojecteur {
 	}
 	
@@ -40,7 +41,6 @@ public class JsonViews {
 	
 	public static class Matiere {
 	}
-
 	
 	public static class MatiereAvecEnseignement {
 	}

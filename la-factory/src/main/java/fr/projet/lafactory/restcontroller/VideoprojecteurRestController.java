@@ -60,7 +60,7 @@ public class VideoprojecteurRestController {
 		
 	// --- CREATE ---
 		
-		@JsonView(JsonViews.Videoprojecteur.class)
+	//	@JsonView(JsonViews.Videoprojecteur.class)
 		@PostMapping(value = {"","/"})
 		public ResponseEntity<Void> insert(@Valid @RequestBody Videoprojecteur videoprojecteur, BindingResult br, UriComponentsBuilder uCB) {
 			if(br.hasErrors()) {

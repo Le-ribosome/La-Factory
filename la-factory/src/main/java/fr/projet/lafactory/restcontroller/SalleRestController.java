@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation.sopra.sopraSpringBoot.model.Produit;
 import fr.projet.lafactory.dao.IDAOSalle;
 import fr.projet.lafactory.model.Salle;
 import fr.projet.lafactory.model.view.JsonViews; 
