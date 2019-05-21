@@ -19,6 +19,14 @@ public class Enseignement {
 	@Version
 	private int version;
 	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@EmbeddedId
 	private EnseignementID id;
 

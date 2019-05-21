@@ -115,7 +115,7 @@ public class EnseignementRestController {
 		}
 		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-	//		enseignement.setVersion(opt.get().getVersion());
+			enseignement.setVersion(opt.get().getVersion());
 			enseignement.setId(enseignement.getId());;
 			daoEnseignement.save(enseignement);
 			return new ResponseEntity<>(HttpStatus.OK);
