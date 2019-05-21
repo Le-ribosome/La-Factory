@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="videoprojecteur")
+@Table(name="Videoprojecteur")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="VID_ID")),
 	@AttributeOverride(name="code", column=@Column(name="VID_CODE")),
