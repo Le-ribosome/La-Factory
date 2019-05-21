@@ -1,4 +1,4 @@
-package fr.projet.service;
+package fr.projet.lafactory.service;
 
 import java.util.ArrayList;
 import java.util.Collection;

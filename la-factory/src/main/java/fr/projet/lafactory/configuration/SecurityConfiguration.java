@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import fr.projet.lafactory.component.MyAccessDeniedHandler;
-import fr.projet.service.CustomUserDetailsService;
+import fr.projet.lafactory.service.CustomUserDetailsService;
 
 
 @Configuration
