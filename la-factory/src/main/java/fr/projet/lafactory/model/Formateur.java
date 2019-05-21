@@ -1,9 +1,13 @@
 package fr.projet.lafactory.model;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "version", column = @Column(name = "FOR_VERSION")) })
 public class Formateur extends Personne {
 
-	
+	@ManyToMany
+	private List<Matiere> matieres;
 	
 }

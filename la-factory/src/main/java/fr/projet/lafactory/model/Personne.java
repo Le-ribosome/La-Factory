@@ -43,7 +43,4 @@ public class Personne {
 	private List<PersonneDroit> droits;
 	
 	
-	
-	
-	
 }

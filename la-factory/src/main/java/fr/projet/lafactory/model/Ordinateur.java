@@ -36,7 +36,8 @@ public class Ordinateur extends Materiel{
 	@Column(name="ORD_ANNEEACHAT")
 	@NotNull
 	private int anneeAchat;
-	
-	@OneToMany(mappedBy="STAGIAIRE")
-	private Stagiaire proprietaire;
+
+	@Column(name="ORD_STAGIAIRE_ID")
+	@OneToMany(mappedBy="ordinateur")
+	private Stagiaire stagiaire;
 }
