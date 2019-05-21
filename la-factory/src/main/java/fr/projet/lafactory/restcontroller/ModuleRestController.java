@@ -44,7 +44,19 @@ public class ModuleRestController {
 
 	@JsonView(JsonViews.ModuleAvecMatiere.class)
 	@GetMapping("/matiere")
-	public List<Module> findAllModule() {
+	public List<Module> findAllModuleMatiere() {
+		return daoModule.findAll();
+	}
+	
+	@JsonView(JsonViews.ModuleAvecFormateur.class)
+	@GetMapping("/formateur")
+	public List<Module> findAllModuleFormateur() {
+		return daoModule.findAll();
+	}
+	
+	@JsonView(JsonViews.ModuleAvecFormation.class)
+	@GetMapping("/formation")
+	public List<Module> findAllModuleFormation() {
 		return daoModule.findAll();
 	}
 
