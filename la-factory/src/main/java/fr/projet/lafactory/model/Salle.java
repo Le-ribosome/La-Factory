@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="salle")
+@Table(name="Salle")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="SAL_ID")),
 	@AttributeOverride(name="code", column=@Column(name="SAL_CODE")),
