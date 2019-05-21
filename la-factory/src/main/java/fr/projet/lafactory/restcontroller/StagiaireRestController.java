@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+
 import fr.projet.lafactory.dao.IDAOStagiaire;
 import fr.projet.lafactory.model.Stagiaire;
 import fr.projet.lafactory.model.view.JsonViews;
@@ -41,6 +42,13 @@ public class StagiaireRestController {
 	public ResponseEntity<List<Stagiaire>> findAll() {
 		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
 	}
+	
+	@JsonView(JsonViews.StagiaireAvecFormation.class)
+	@GetMapping("/formation")
+	public List<Stagiaire> findAllStagiaire(){
+		return daoStagiaire.findAll();
+	}
+	
 
 	// --- By ID ---
 	@GetMapping("/{id}")
