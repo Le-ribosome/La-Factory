@@ -18,7 +18,7 @@ import javax.persistence.Table;
 //	@AttributeOverride(name = "version", column = @Column(name = "GES_VERSION")) })
 public class Gestionnaire extends Personne {
 	
-	@OneToMany(mappedBy="Formation")
+	@OneToMany(mappedBy="gestionnaire")
 	private List<Formation> formations;
 
 }
