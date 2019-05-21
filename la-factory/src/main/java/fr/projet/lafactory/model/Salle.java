@@ -10,43 +10,34 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Salle")
-@AttributeOverrides({
-	@AttributeOverride(name="id", column=@Column(name="SAL_ID")),
-	@AttributeOverride(name="code", column=@Column(name="SAL_CODE")),
-	@AttributeOverride(name="coutJournee", column=@Column(name="SAL_COUTJOURNEE"))
-})
-public class Salle extends Materiel{
-	
-	@Column(name="SAL_CAPACITE")
+@Table(name = "Salle")
+@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "SAL_ID")),
+		@AttributeOverride(name = "code", column = @Column(name = "SAL_CODE")),
+		@AttributeOverride(name = "coutJournee", column = @Column(name = "SAL_COUTJOURNEE")) })
+public class Salle extends Materiel {
+
+	@Column(name = "SAL_CAPACITE")
 	@NotNull
 	private int capacite;
-	
-	
-	@JoinColumn(name="SAL_VIDEOPROJECTEUR_ID")
-	@OneToOne(mappedBy="videoprojecteur")
-	private Videoprojecteur videoprojecteur;
 
+	@JoinColumn(name = "SAL_VIDEOPROJECTEUR_ID", nullable = true)
+	@OneToOne(mappedBy = "salle")
+	private Videoprojecteur videoprojecteur;
 
 	public int getCapacite() {
 		return capacite;
 	}
 
-
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}
-
 
 	public Videoprojecteur getVideoprojecteur() {
 		return videoprojecteur;
 	}
 
-
 	public void setVideoprojecteur(Videoprojecteur videoprojecteur) {
 		this.videoprojecteur = videoprojecteur;
 	}
-	
-	
 
 }
