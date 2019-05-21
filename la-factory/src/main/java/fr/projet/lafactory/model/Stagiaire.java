@@ -15,7 +15,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 //	@AttributeOverride(name = "nom", column = @Column(name = "STA_NOM")),
 //	@AttributeOverride(name = "prenom", column = @Column(name = "STA_PRENOM")),
 //	@AttributeOverride(name = "adresse", column = @Column(name = "STA_ADRESSE")),
-//	@AttributeOverride(name = "email", column = @Column(name = "STA_ADRESSE")),
+//	@AttributeOverride(name = "email", column = @Column(name = "STA_EMAIL")),
 //	@AttributeOverride(name = "telephone", column = @Column(name = "STA_TELEPHONE")),
 //	@AttributeOverride(name = "motDePasse", column = @Column(name = "STA_MOTDEPASSE")),
 //	@AttributeOverride(name = "version", column = @Column(name = "STA_VERSION")) })
