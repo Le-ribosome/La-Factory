@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import fr.formation.sopra.sopraSpringBoot.model.Produit;
 import fr.projet.lafactory.dao.IDAOMatiere;
 import fr.projet.lafactory.model.Matiere;
 import fr.projet.lafactory.model.view.JsonViews;
@@ -36,11 +35,13 @@ public class MatiereRestController {
 	@Autowired
 	private IDAOMatiere daoMatiere; 
 	
+	// donne la liste des matières
 	@GetMapping(value = { "", "/" })
 	@JsonView(JsonViews.Matiere.class)
 	public ResponseEntity<List<Matiere>> findAll() {
 		return new ResponseEntity<List<Matiere>>(daoMatiere.findAll(), HttpStatus.OK);
 	}
+	
 	
 	// Donne la liste des formateurs accrédités pour chaque matière
 	@JsonView(JsonViews.MatiereAvecEnseignement.class)
@@ -49,6 +50,7 @@ public class MatiereRestController {
 		return daoMatiere.findAll();
 	}
 	
+	// Pour ajouter une matière
 	@PostMapping(value = { "", "/" })
 	public ResponseEntity<Void> insert(@Valid @RequestBody Matiere matiere, BindingResult br,
 			UriComponentsBuilder uCB) {
@@ -61,6 +63,7 @@ public class MatiereRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
+	// cherche les formateurs accrédités a cette matière
 	@JsonView(JsonViews.MatiereAvecEnseignement.class)
 	@GetMapping("/{id}/formateur")
 	public ResponseEntity<Matiere> findByIdWithFormateur(@PathVariable(name = "id") Integer id) {
@@ -72,6 +75,7 @@ public class MatiereRestController {
 		}
 	}
 	
+	// affiche la matière
 	 @JsonView(JsonViews.Matiere.class)
 	    @GetMapping("/{id}")
 	    public ResponseEntity<Matiere> findById(@PathVariable(name="id") Integer id){
@@ -83,6 +87,7 @@ public class MatiereRestController {
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	    }
+	 // Pour modifier la matière, et suivre le numéro de sa version
 	 @PutMapping("/{id}")
 		public ResponseEntity<Void> update(@PathVariable(name="id") Integer id,@Valid @RequestBody Matiere matiere, BindingResult br) {
 				if(br.hasErrors()) {
@@ -90,7 +95,7 @@ public class MatiereRestController {
 				}
 				Optional<Matiere> opt = daoMatiere.findById(id);
 				if (opt.isPresent()) {
-					matiere.setId(id); // si pas d'id il crée le produit
+					matiere.setId(id); // si pas d'id il crée la matière
 					matiere.setVersion(opt.get().getVersion());
 					daoMatiere.save(matiere);
 					return new ResponseEntity<>(HttpStatus.OK);
@@ -99,7 +104,7 @@ public class MatiereRestController {
 				}
 				
 			}
-	 
+	 // supprimer une matière
 	 @DeleteMapping("/{id}")
 		public ResponseEntity<Void> delete(@PathVariable(name="id") Integer id) {
 			Optional<Matiere> opt = daoMatiere.findById(id);
