@@ -9,6 +9,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Salle")
 @AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "SAL_ID")),
@@ -17,10 +21,12 @@ import javax.validation.constraints.NotNull;
 		@AttributeOverride(name = "coutJournee", column = @Column(name = "SAL_COUTJOURNEE")) })
 public class Salle extends Materiel {
 
+	@JsonView(JsonViews.Salle.class)
 	@Column(name = "SAL_CAPACITE")
 	@NotNull
 	private int capacite;
 
+	@JsonView(JsonViews.SalleAvecVideoprojecteur.class)
 	@OneToOne()
 	@JoinColumn(name = "SAL_VIDEOPROJECTEUR_ID", nullable = true)
 	private Videoprojecteur videoprojecteur;
