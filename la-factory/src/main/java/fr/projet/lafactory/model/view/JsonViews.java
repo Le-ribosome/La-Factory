@@ -13,6 +13,9 @@ public class JsonViews {
 	public static class StagiaireAvecFormation {
 	}
 	
+	public static class StagiaireAvecOrdinateur {
+	}
+	
 	// --- Materiel ---
 	
 	
@@ -42,7 +45,6 @@ public static class Materiel {
 	
 	public static class Matiere {
 	}
-
 	
 	public static class MatiereAvecEnseignement {
 	}
