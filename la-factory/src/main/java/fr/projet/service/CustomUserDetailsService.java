@@ -8,8 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.example.formation.dao.IDAOUtilisateur;
-import fr.example.formation.model.Utilisateur;
+import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.model.Personne;
 
 @Service
