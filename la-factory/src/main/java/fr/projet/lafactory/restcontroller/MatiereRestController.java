@@ -1,4 +1,4 @@
-package fr.projet.restcontroller;
+package fr.projet.lafactory.restcontroller;
 
 import java.util.List;
 import java.util.Optional;

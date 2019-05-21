@@ -1,4 +1,4 @@
-package fr.projet.restcontroller;
+package fr.projet.lafactory.restcontroller;
 
 
 import org.springframework.http.HttpStatus;
