@@ -23,96 +23,106 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
-import fr.projet.lafactory.dao.IDAOStagiaire;
-import fr.projet.lafactory.model.Stagiaire;
+import fr.projet.lafactory.dao.IDAOModule;
+import fr.projet.lafactory.model.Module;
 import fr.projet.lafactory.model.view.JsonViews;
 
 @RestController
-@RequestMapping("/rest/stagiaire")
+@RequestMapping("/rest/module")
 @CrossOrigin(origins = "*")
-public class StagiaireRestController {
+public class ModuleRestController {
 
 	@Autowired
-	private IDAOStagiaire daoStagiaire;
+	private IDAOModule daoModule;
 
 	// --- READ ---
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = { "", "/" })
-	public ResponseEntity<List<Stagiaire>> findAll() {
-		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Module>> findAll() {
+		return new ResponseEntity<List<Module>>(daoModule.findAll(), HttpStatus.OK);
 	}
-	
-	@JsonView(JsonViews.StagiaireAvecFormation.class)
-	@GetMapping("/formation")
-	public List<Stagiaire> findAllStagiaire(){
-		return daoStagiaire.findAll();
+
+	@JsonView(JsonViews.ModuleAvecMatiere.class)
+	@GetMapping("/matiere")
+	public List<Module> findAllModule() {
+		return daoModule.findAll();
 	}
-	
 
 	// --- By ID ---
 	@GetMapping("/{id}")
-	public ResponseEntity<Stagiaire> findById(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+	public ResponseEntity<Module> findById(@PathVariable(name = "id") Integer id) {
+		Optional<Module> opt = daoModule.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
+	// -- By ID avec Formateur --
+
+	@JsonView(JsonViews.ModuleAvecFormateur.class)
+		@GetMapping("/{id}/formateur")
+		public ResponseEntity<Module> findByIdWithFormateur(@PathVariable(name="id") Integer id) {
+		Optional<Module> opt = daoModule.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 
 	// -- By ID avec Formation --
-	@JsonView(JsonViews.StagiaireAvecFormation.class)
-	@GetMapping("/{id}/formation")
-	public ResponseEntity<Stagiaire> findByIdAvecFormation(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
-		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
 
-	// -- By ID avec Ordinateur --
-	@JsonView(JsonViews.StagiaireAvecOrdinateur.class)
-	@GetMapping("/{id}/ordinateur")
-	public ResponseEntity<Stagiaire> findByIdAvecOrdinateur(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+	@JsonView(JsonViews.ModuleAvecFormation.class)
+		@GetMapping("/{id}/formation")
+		public ResponseEntity<Module> findByIdWithFormation(@PathVariable(name="id") Integer id) {
+		Optional<Module> opt = daoModule.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
+	// -- By ID avec Matiere --
+
+	@JsonView(JsonViews.ModuleAvecMatiere.class)
+	@GetMapping("/{id}/matiere")
+	public ResponseEntity<Module> findByIdWithMatiere(@PathVariable(name="id") Integer id) {
+	Optional<Module> opt = daoModule.findById(id);
+	if (opt.isPresent()) {
+		return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	// --- CREATE ---
 
-	@JsonView(JsonViews.Stagiaire.class)
+	@JsonView(JsonViews.Module.class)
 	@PostMapping(value = { "", "/" })
-	public ResponseEntity<Void> insert(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
+	public ResponseEntity<Void> insert(@Valid @RequestBody Module module, BindingResult br,
 			UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		daoStagiaire.save(stagiaire);
+		daoModule.save(module);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
+		headers.setLocation(uCB.path("/rest/module/{id}").buildAndExpand(module.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	// --- UPDATE ---
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Stagiaire stagiaire,
+	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Module module,
 			BindingResult br) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		Optional<Module> opt = daoModule.findById(id);
 		if (opt.isPresent()) {
-			stagiaire.setVersion(opt.get().getVersion());
-			stagiaire.setId(id);
-			daoStagiaire.save(stagiaire);
+			module.setVersion(opt.get().getVersion());
+			module.setId(id);
+			daoModule.save(module);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -122,13 +132,12 @@ public class StagiaireRestController {
 	// --- DELETE ---
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		Optional<Module> opt = daoModule.findById(id);
 		if (opt.isPresent()) {
-			daoStagiaire.deleteById(id);
+			daoModule.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 }

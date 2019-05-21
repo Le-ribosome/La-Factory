@@ -46,7 +46,7 @@ public class MatiereRestController {
 	// Donne la liste des formateurs accrédités pour chaque matière
 	@JsonView(JsonViews.MatiereAvecEnseignement.class)
 	@GetMapping("/formateur")
-	public List<Matiere> findAllWithMatieres() { 
+	public List<Matiere> findAllWithFormateur() { 
 		return daoMatiere.findAll();
 	}
 	
