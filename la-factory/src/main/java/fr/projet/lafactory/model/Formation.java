@@ -25,6 +25,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 @Table(name = "Formation")
 public class Formation {
 
+	@JsonView(JsonViews.Formation.class)
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "FMT_ID")
@@ -46,6 +47,7 @@ public class Formation {
 	@Version
 	private int version;
 
+	@JsonView(JsonViews.FormationAvecGestionnaire.class)
 	@ManyToOne()
 	@JoinColumn(name = "FMT_GESTIONNAIRE_ID", nullable = true)
 	private Gestionnaire gestionnaire;
@@ -59,6 +61,7 @@ public class Formation {
 	@OneToMany(mappedBy = "formation")
 	private List<Module> modules;
 
+	@JsonView(JsonViews.FormationAvecStagiaire.class)
 	@OneToMany(mappedBy = "formation")
 	private List<Stagiaire> stagiaires;
 

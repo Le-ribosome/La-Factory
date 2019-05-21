@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Videoprojecteur")
 @AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "VID_ID")),
@@ -16,6 +20,7 @@ import javax.persistence.Table;
 
 public class Videoprojecteur extends Materiel {
 
+	@JsonView(JsonViews.VideoprojecteurAvecSalle.class)
 	@OneToOne(mappedBy = "videoprojecteur")
 	private Salle salle;
 

@@ -34,6 +34,7 @@ public class Indisponibilite {
 		this.version = version;
 	}
 
+	@JsonView(JsonViews.Indisponibilite.class)
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "IND_ID")
@@ -51,6 +52,7 @@ public class Indisponibilite {
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
+	@JsonView(JsonViews.IndisponibiliteAvecFormateur.class)
 	@ManyToOne()
 	@JoinColumn(name = "IND_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;
