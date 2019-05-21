@@ -132,11 +132,35 @@ public class UserRestController {
 		return new ResponseEntity<List<Formateur>>(daoFormateur.findAll(), HttpStatus.OK);
 	}
 	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/formateur/{id}")
+	public ResponseEntity<Formateur> findFormateurById(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//Gestionnaires
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = {"/gestionnaires"})
 	public ResponseEntity<List<Gestionnaire>> findAllGestionnaires() {
 		return new ResponseEntity<List<Gestionnaire>>(daoGestionnaire.findAll(), HttpStatus.OK);
+	}
+	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/gestionnaire/{id}")
+	public ResponseEntity<Gestionnaire> findGestionnaireById(@PathVariable(name="id") Integer id){
+		Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Gestionnaire>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	//Stagiaires
@@ -146,11 +170,35 @@ public class UserRestController {
 		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
 	}
 	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/stagiaire/{id}")
+	public ResponseEntity<Stagiaire> findStagiaireById(@PathVariable(name="id") Integer id){
+		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//Techniciens
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = {"/techniciens"})
 	public ResponseEntity<List<Technicien>> findAllTechniciens() {
 		return new ResponseEntity<List<Technicien>>(daoTechnicien.findAll(), HttpStatus.OK);
+	}
+	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/technicien/{id}")
+	public ResponseEntity<Formateur> findTechniciensById(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 //UPDATE pour: 
@@ -161,7 +209,6 @@ public class UserRestController {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         } else {
             Optional<Formateur> opt = daoFormateur.findById(id);
-//            produit.setVersion(opt.get().getVersion());
             if(opt.isPresent()) {
                 formateur.setVersion(opt.get().getVersion());
                 formateur.setId(id);
