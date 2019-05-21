@@ -13,29 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.projet.lafactory.dao.IDAOOrdinateur;
+import fr.projet.lafactory.dao.IDAOVideoprojecteur;
 import fr.projet.lafactory.model.Ordinateur;
+import fr.projet.lafactory.model.Videoprojecteur;
 import fr.projet.lafactory.model.view.JsonViews;
 
-@RestController
-@RequestMapping("/rest/ordinateur")
-@CrossOrigin(origins= "*")
-public class OrdinateurRestController {
+@RestController 
+@RequestMapping("/rest/videoprojecteur") 
+@CrossOrigin(origins = "*") 
+public class VideoprojecteurRestController {
 
 	@Autowired
-	private IDAOOrdinateur daoOrdinateur; 
+	private IDAOVideoprojecteur daoVideoprojecteur;
 	
 	// donne la liste des ordinateurs
 		@GetMapping(value = { "", "/" })
-		@JsonView(JsonViews.Ordinateur.class)
-		public ResponseEntity<List<Ordinateur>> findAll() {
-			return new ResponseEntity<List<Ordinateur>>(daoOrdinateur.findAll(), HttpStatus.OK);
+		@JsonView(JsonViews.Videoprojecteur.class)
+		public ResponseEntity<List<Videoprojecteur>> findAll() {
+			return new ResponseEntity<List<Videoprojecteur>>(daoVideoprojecteur.findAll(), HttpStatus.OK);
 		}
-		
-		// Donne la liste des formateurs accrédités pour chaque matière
-		@JsonView(JsonViews.OrdinateurAvecStagiaire.class)
-		@GetMapping("/stagiaire")
-		public List<Ordinateur> findAllWithOrdinateurs() { 
-			return daoOrdinateur.findAll();
-		}
-	
 }
