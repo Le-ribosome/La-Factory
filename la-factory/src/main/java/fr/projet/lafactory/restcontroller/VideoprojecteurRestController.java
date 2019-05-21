@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation.sopra.sopraSpringBoot.model.Produit;
 import fr.projet.lafactory.dao.IDAOOrdinateur;
 import fr.projet.lafactory.dao.IDAOVideoprojecteur;
 import fr.projet.lafactory.model.Ordinateur;
@@ -38,17 +37,16 @@ public class VideoprojecteurRestController {
 	@Autowired
 	private IDAOVideoprojecteur daoVideoprojecteur;
 	
-	// CRUD
 	
-	// READ
-	// --- Liste des videoprojecteurs ---
+	// --- READ ---
+	
 		@GetMapping(value = { "", "/" })
 		@JsonView(JsonViews.Videoprojecteur.class)
 		public ResponseEntity<List<Videoprojecteur>> findAll() {
 			return new ResponseEntity<List<Videoprojecteur>>(daoVideoprojecteur.findAll(), HttpStatus.OK);
 		}
 		
-		// FindById	
+		// -- By ID ---
 		@JsonView(JsonViews.Videoprojecteur.class)
 		@GetMapping("/{id}")
 		public ResponseEntity<Videoprojecteur> findById(@PathVariable(name="id") Integer id) {
@@ -60,7 +58,7 @@ public class VideoprojecteurRestController {
 			}
 		}
 		
-	// --- Ajout ---
+	// --- CREATE ---
 		
 		@JsonView(JsonViews.Videoprojecteur.class)
 		@PostMapping(value = {"","/"})
@@ -107,8 +105,5 @@ public class VideoprojecteurRestController {
 			}
 			
 		}
-		
-		
-		
 		
 }

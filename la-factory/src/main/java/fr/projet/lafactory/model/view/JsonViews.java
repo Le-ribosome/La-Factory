@@ -1,36 +1,49 @@
 package fr.projet.lafactory.model.view;
 
 public class JsonViews {
-
+	
+	// --- RH ---
+	
 	public static class User {
-
 	}
-
-	public static class Matiere {
-
+	
+	public static class Stagiaire {
 	}
+	
+	public static class StagiaireAvecFormation {
+	}
+	
+	// --- Materiel ---
+	
+	
 
+	
 	public static class Ordinateur {
-
+	}
+	
+	public static class OrdinateurAvecStagiaire {
 	}
 
 	public static class Salle {
-
 	}
 
 	public static class SalleAvecVideoprojecteur {
-
 	}
+	
 	
 	public static class Videoprojecteur {
-
 	}
 	
-	public static class MatiereAvecEnseignement {
-
+	
+	
+	// --- Formation ---
+	
+	public static class Matiere {
 	}
 
-		public static class OrdinateurAvecStagiaire {
-			
-		}
+	
+	public static class MatiereAvecEnseignement {
+	}
+
+	
 }
