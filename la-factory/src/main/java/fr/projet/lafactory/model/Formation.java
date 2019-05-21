@@ -17,20 +17,27 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Formation")
 public class Formation {
 
+	@JsonView(JsonViews.Formation.class)
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "FMT_ID")
 	private int id;
 
+	@JsonView(JsonViews.Formation.class)
 	@Column(name = "FMT_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
+	@JsonView(JsonViews.Formation.class)
 	@Column(name = "FMT_DATEFIN")
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -40,17 +47,21 @@ public class Formation {
 	@Version
 	private int version;
 
+	@JsonView(JsonViews.FormationAvecGestionnaire.class)
 	@ManyToOne()
 	@JoinColumn(name = "FMT_GESTIONNAIRE_ID", nullable = true)
 	private Gestionnaire gestionnaire;
 
+	@JsonView(JsonViews.FormationAvecSalle.class)
 	@ManyToOne()
 	@JoinColumn(name = "FMT_SALLE_ID", nullable = true)
 	private Salle salle;
 
+	@JsonView(JsonViews.FormationAvecModule.class)
 	@OneToMany(mappedBy = "formation")
 	private List<Module> modules;
 
+	@JsonView(JsonViews.FormationAvecStagiaire.class)
 	@OneToMany(mappedBy = "formation")
 	private List<Stagiaire> stagiaires;
 

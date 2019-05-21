@@ -8,6 +8,10 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Enseignement")
 public class Enseignement {
@@ -18,11 +22,13 @@ public class Enseignement {
 	@EmbeddedId
 	private EnseignementID id;
 
+	@JsonView(JsonViews.EnseignementAvecFormateur.class)
 	@ManyToOne()
     @MapsId("ENS_FORMATEUR_ID")
 	@JoinColumn(name = "ENS_FORMATEUR_ID", insertable = false, updatable = false)
 	private Formateur formateur;
 
+	@JsonView(JsonViews.EnseignementAvecMatiere.class)
 	@ManyToOne()
     @MapsId("ENS_MATIERE_ID")
 	@JoinColumn(name = "ENS_MATIERE_ID", insertable = false, updatable = false)
