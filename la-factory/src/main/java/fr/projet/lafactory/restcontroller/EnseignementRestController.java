@@ -106,23 +106,23 @@ public class EnseignementRestController {
 	}
 
 	// --- UPDATE ---
-//
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id,
-//			@Valid @RequestBody Enseignement enseignement, BindingResult br) {
-//		if (br.hasErrors()) {
-//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//		}
-//		Optional<Enseignement> opt = daoEnseignement.findById(id);
-//		if (opt.isPresent()) {
-//			enseignement.setVersion(opt.get().getVersion());
-//			enseignement.setId(id);;
-//			daoEnseignement.save(enseignement);
-//			return new ResponseEntity<>(HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id,
+			@Valid @RequestBody Enseignement enseignement, BindingResult br) {
+		if (br.hasErrors()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
+		if (opt.isPresent()) {
+	//		enseignement.setVersion(opt.get().getVersion());
+			enseignement.setId(enseignement.getId());;
+			daoEnseignement.save(enseignement);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	// --- DELETE ---
 	@DeleteMapping("/{id}")
