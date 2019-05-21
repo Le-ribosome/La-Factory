@@ -15,6 +15,10 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Module")
 public class Module {
@@ -24,6 +28,7 @@ public class Module {
 	@Column(name = "MOD_ID")
 	private int id;
 
+	@JsonView(JsonViews.Gestionnaire.class)
 	@Column(name = "MOD_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -33,10 +38,12 @@ public class Module {
 	@Version
 	private int version;
 
+	@JsonView(JsonViews.Gestionnaire.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_MATIERE_ID", nullable = true)
 	private Matiere matiere;
 
+	@JsonView(JsonViews.Gestionnaire.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;

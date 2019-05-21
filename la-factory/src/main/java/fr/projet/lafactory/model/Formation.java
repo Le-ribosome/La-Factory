@@ -31,13 +31,13 @@ public class Formation {
 	@Column(name = "FMT_ID")
 	private int id;
 
-	@JsonView(JsonViews.Formation.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@Column(name = "FMT_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
-	@JsonView(JsonViews.Formation.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@Column(name = "FMT_DATEFIN")
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -52,12 +52,12 @@ public class Formation {
 	@JoinColumn(name = "FMT_GESTIONNAIRE_ID", nullable = true)
 	private Gestionnaire gestionnaire;
 
-	@JsonView(JsonViews.FormationAvecSalle.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@ManyToOne()
 	@JoinColumn(name = "FMT_SALLE_ID", nullable = true)
 	private Salle salle;
 
-	@JsonView(JsonViews.FormationAvecModule.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@OneToMany(mappedBy = "formation")
 	private List<Module> modules;
 

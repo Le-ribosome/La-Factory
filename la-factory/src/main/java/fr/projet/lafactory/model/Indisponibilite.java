@@ -40,13 +40,13 @@ public class Indisponibilite {
 	@Column(name = "IND_ID")
 	private int id;
 
-	@JsonView(JsonViews.Indisponibilite.class)
+	@JsonView(JsonViews.Formateur.class)
 	@Column(name = "IND_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
-	@JsonView(JsonViews.Indisponibilite.class)
+	@JsonView(JsonViews.Formateur.class)
 	@Column(name = "IND_DATEFIN")
 	@NotNull
 	@Temporal(TemporalType.DATE)

@@ -28,7 +28,7 @@ public class Enseignement {
 	@JoinColumn(name = "ENS_FORMATEUR_ID", insertable = false, updatable = false)
 	private Formateur formateur;
 
-	@JsonView(JsonViews.EnseignementAvecMatiere.class)
+	@JsonView(JsonViews.Formateur.class)
 	@ManyToOne()
     @MapsId("ENS_MATIERE_ID")
 	@JoinColumn(name = "ENS_MATIERE_ID", insertable = false, updatable = false)
