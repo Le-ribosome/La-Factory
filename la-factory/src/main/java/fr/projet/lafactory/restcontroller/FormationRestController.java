@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import fr.projet.lafactory.dao.IDAOFormation;
 import fr.projet.lafactory.model.Formation;
 import fr.projet.lafactory.model.view.JsonViews;
+import fr.projet.lafactory.model.view.JsonViews.FormationAvecSalle;
 
 @RestController
 @RequestMapping("/rest/formation")
@@ -42,7 +43,7 @@ public class FormationRestController {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.FormationAvecSalle.class)
+	@JsonView(FormationAvecSalle.class)
 	@GetMapping("/salle")
 	public List<Formation> findAllFormationSalle() {
 		return daoFormation.findAll();
