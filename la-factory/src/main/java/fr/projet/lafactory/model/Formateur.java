@@ -24,4 +24,14 @@ public class Formateur extends Personne {
 	@OneToMany(mappedBy = "formateur")
 	private List<Enseignement> enseignements;
 
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
+	}
+
+	
+	
 }

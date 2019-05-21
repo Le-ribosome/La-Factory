@@ -41,4 +41,47 @@ public class Ordinateur extends Materiel{
 
 	@OneToMany(mappedBy="ordinateur")
 	private List<Stagiaire> stagiaires;
+
+	public String getProcesseur() {
+		return processeur;
+	}
+
+	public void setProcesseur(String processeur) {
+		this.processeur = processeur;
+	}
+
+	public int getQuantiteRAM() {
+		return quantiteRAM;
+	}
+
+	public void setQuantiteRAM(int quantiteRAM) {
+		this.quantiteRAM = quantiteRAM;
+	}
+
+	public int getQuantitedd() {
+		return quantitedd;
+	}
+
+	public void setQuantitedd(int quantitedd) {
+		this.quantitedd = quantitedd;
+	}
+
+	public int getAnneeAchat() {
+		return anneeAchat;
+	}
+
+	public void setAnneeAchat(int anneeAchat) {
+		this.anneeAchat = anneeAchat;
+	}
+
+	public List<Stagiaire> getStagiaires() {
+		return stagiaires;
+	}
+
+	public void setStagiaires(List<Stagiaire> stagiaires) {
+		this.stagiaires = stagiaires;
+	}
+	
+	
+	
 }

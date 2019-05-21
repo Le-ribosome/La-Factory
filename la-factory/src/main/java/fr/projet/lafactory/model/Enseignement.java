@@ -21,4 +21,30 @@ public class Enseignement {
 	@JoinColumn(name = "ENS_MATIERE_ID")
 	private Matiere matiere;
 
+	public EnseignementID getId() {
+		return id;
+	}
+
+	public void setId(EnseignementID id) {
+		this.id = id;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+	
+	
+
 }

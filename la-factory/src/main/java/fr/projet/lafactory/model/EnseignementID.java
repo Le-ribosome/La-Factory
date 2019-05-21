@@ -17,4 +17,26 @@ public class EnseignementID implements Serializable {
 	@Column(name = "ENS_MATIERE_ID")
 	private int idMatiere;
 
+	public int getIdFormateur() {
+		return idFormateur;
+	}
+
+	public void setIdFormateur(int idFormateur) {
+		this.idFormateur = idFormateur;
+	}
+
+	public int getIdMatiere() {
+		return idMatiere;
+	}
+
+	public void setIdMatiere(int idMatiere) {
+		this.idMatiere = idMatiere;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+	
 }

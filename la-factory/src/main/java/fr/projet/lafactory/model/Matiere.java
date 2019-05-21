@@ -48,5 +48,71 @@ public class Matiere {
 	@OneToMany(mappedBy="matiere")
 	private List<Enseignement> enseignements;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getObjectif() {
+		return objectif;
+	}
+
+	public void setObjectif(String objectif) {
+		this.objectif = objectif;
+	}
+
+	public String getPrerequis() {
+		return prerequis;
+	}
+
+	public void setPrerequis(String prerequis) {
+		this.prerequis = prerequis;
+	}
+
+	public String getContenu() {
+		return contenu;
+	}
+
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
+	}
+
+	public int getNbJours() {
+		return nbJours;
+	}
+
+	public void setNbJours(int nbJours) {
+		this.nbJours = nbJours;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
+	}
+
+	
+	
 	
 }

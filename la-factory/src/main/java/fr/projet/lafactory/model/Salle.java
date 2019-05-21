@@ -27,4 +27,26 @@ public class Salle extends Materiel{
 	@OneToOne(mappedBy="videoprojecteur")
 	private Videoprojecteur videoprojecteur;
 
+
+	public int getCapacite() {
+		return capacite;
+	}
+
+
+	public void setCapacite(int capacite) {
+		this.capacite = capacite;
+	}
+
+
+	public Videoprojecteur getVideoprojecteur() {
+		return videoprojecteur;
+	}
+
+
+	public void setVideoprojecteur(Videoprojecteur videoprojecteur) {
+		this.videoprojecteur = videoprojecteur;
+	}
+	
+	
+
 }

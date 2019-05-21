@@ -28,5 +28,31 @@ public class PersonneDroit {
 	@ManyToOne
 	@JoinColumn(name = "DRO_PERSONNE_ID")
 	private Personne personne;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Droit getDroit() {
+		return droit;
+	}
+
+	public void setDroit(Droit droit) {
+		this.droit = droit;
+	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
+	
+	
 	
 }

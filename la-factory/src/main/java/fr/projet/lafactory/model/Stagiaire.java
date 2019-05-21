@@ -27,5 +27,22 @@ public class Stagiaire extends Personne {
 	@ManyToOne()
 	@JoinColumn(name = "STA_ORDINATEUR_ID", nullable = true)
 	private Ordinateur ordinateur;
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	public Ordinateur getOrdinateur() {
+		return ordinateur;
+	}
+
+	public void setOrdinateur(Ordinateur ordinateur) {
+		this.ordinateur = ordinateur;
+	}
+
 	
 }
