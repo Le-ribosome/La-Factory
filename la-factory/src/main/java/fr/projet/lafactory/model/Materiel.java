@@ -1,12 +1,10 @@
 package fr.projet.lafactory.model;
 
-import java.util.Date;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public class Materiel {
@@ -15,16 +13,12 @@ public class Materiel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotNull
-	private String code;
+	@Version
+	private int version;
 	
-	@NotNull
-	private float coutJournee;
+	private String code = "MAT";
 	
-	private boolean estDisponible(Date dateDebut, Date dateFin) {
-		boolean estDispo = true;
-		return estDispo;
-	}
+	private float coutJournee = 0;
 
 	public int getId() {
 		return id;

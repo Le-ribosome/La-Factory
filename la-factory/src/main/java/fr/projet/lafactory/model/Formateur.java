@@ -21,6 +21,9 @@ public class Formateur extends Personne {
 	@OneToMany(mappedBy = "formateur")
 	private List<Enseignement> enseignements;
 
+	@OneToMany(mappedBy = "formateur")
+	private List<Indisponibilite> indisponibilites;
+	
 	public List<Enseignement> getEnseignements() {
 		return enseignements;
 	}

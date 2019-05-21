@@ -27,9 +27,12 @@ public class Matiere {
 	@Column(name = "MAT_NOM")
 	@NotNull
 	private String nom;
+	
+	@Column(name = "MAT_NIVEAU")
+	@NotNull
+	private String niveau;
 
 	@Column(name = "MAT_OBJECTIF")
-	@NotNull
 	private String objectif;
 
 	@Column(name = "MAT_PREREQUIS")
