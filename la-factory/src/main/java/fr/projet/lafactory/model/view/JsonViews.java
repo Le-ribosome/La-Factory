@@ -55,7 +55,7 @@ public class JsonViews {
 	public static class Enseignement{
 	}
 	
-	public static class EnseignementAvecSalle extends Enseignement {
+	public static class EnseignementAvecFormateur extends Enseignement {
 	}
 
 	public static class EnseignementAvecMatiere extends Enseignement {

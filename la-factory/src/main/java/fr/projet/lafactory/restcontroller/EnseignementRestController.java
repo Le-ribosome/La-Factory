@@ -31,7 +31,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 @RequestMapping("/rest/enseignement")
 @CrossOrigin(origins = "*")
 public class EnseignementRestController {
-	
+
 	@Autowired
 	private IDAOEnseignement daoEnseignement;
 
@@ -42,17 +42,18 @@ public class EnseignementRestController {
 		return new ResponseEntity<List<Enseignement>>(daoEnseignement.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.EnseignementAvecSalle.class)
-	@GetMapping("/salle")
-	public List<Enseignement> findAllEnseignementSalle() {
+	@JsonView(JsonViews.EnseignementAvecMatiere.class)
+	@GetMapping("/matiere")
+	public List<Enseignement> findAllEnseignementMatiere() {
 		return daoEnseignement.findAll();
 	}
 	
-	@JsonView(JsonViews.EnseignementAvecMatiere.class)
-	@GetMapping("/matiere")
-	public List<Enseignement> findAllEnseignementGestionnaire() {
+	@JsonView(JsonViews.EnseignementAvecFormateur.class)
+	@GetMapping("/formateur")
+	public List<Enseignement> findAllEnseignementFormateur() {
 		return daoEnseignement.findAll();
 	}
+
 
 	// --- By ID ---
 	@GetMapping("/{id}")
@@ -65,11 +66,11 @@ public class EnseignementRestController {
 		}
 	}
 
-	// -- By ID avec Gestionnaire --
+	// -- By ID avec ---
 
-	@JsonView(JsonViews.EnseignementAvecGestionnaire.class)
-		@GetMapping("/{id}/gestionnaire")
-		public ResponseEntity<Enseignement> findByIdWithGestionnaire(@PathVariable(name="id") Integer id) {
+	@JsonView(JsonViews.EnseignementAvecMatiere.class)
+	@GetMapping("/{id}/matiere")
+	public ResponseEntity<Enseignement> findByIdWithMatiere(@PathVariable(name = "id") Integer id) {
 		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
@@ -77,18 +78,16 @@ public class EnseignementRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
-	// -- By ID avec Salle --
-
-	@JsonView(JsonViews.EnseignementAvecSalle.class)
-	@GetMapping("/{id}/salle")
-	public ResponseEntity<Enseignement> findByIdWithSalle(@PathVariable(name="id") Integer id) {
-	Optional<Enseignement> opt = daoEnseignement.findById(id);
-	if (opt.isPresent()) {
-		return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
-	} else {
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+	
+	@JsonView(JsonViews.EnseignementAvecFormateur.class)
+	@GetMapping("/{id}/formateur")
+	public ResponseEntity<Enseignement> findByIdWithFormateur(@PathVariable(name = "id") Integer id) {
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	// --- CREATE ---
@@ -109,15 +108,15 @@ public class EnseignementRestController {
 	// --- UPDATE ---
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Enseignement enseignement,
-			BindingResult br) {
+	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id,
+			@Valid @RequestBody Enseignement enseignement, BindingResult br) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
 			enseignement.setVersion(opt.get().getVersion());
-			enseignement.setId(id);
+			enseignement.setidFormateur(id);
 			daoEnseignement.save(enseignement);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
