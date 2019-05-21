@@ -1,6 +1,7 @@
 package fr.projet.lafactory.restcontroller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,63 +56,71 @@ public class UserRestController {
 	
 //CREATE pour: 
 	
-	//Ajout formateur: 
-	@PostMapping(value= {"/formateur"})
-	public ResponseEntity<Void> insert(@Valid @RequestBody Formateur formateur, BindingResult br, UriComponentsBuilder uCB) {
-		if(br.hasErrors()) {
+	// Ajout formateur:
+	@PostMapping(value = { "/formateur" })
+	public ResponseEntity<Void> insert(@Valid @RequestBody Formateur formateur, BindingResult br,
+			UriComponentsBuilder uCB) {
+		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		daoFormateur.save(formateur);
-		//Ça nous donne une uri, important car dans une reponse on a un body mais aussi un header
+		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
+		// un header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uCB.path("/rest/formateur/{id}").buildAndExpand(formateur.getId()).toUri());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-	
-	//Ajout formateur: 
-		@PostMapping(value= {"/gestionnaire"})
-		public ResponseEntity<Void> insert(@Valid @RequestBody Gestionnaire gestionnaire, BindingResult br, UriComponentsBuilder uCB) {
-			if(br.hasErrors()) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			daoGestionnaire.save(gestionnaire);
-			//Ça nous donne une uri, important car dans une reponse on a un body mais aussi un header
-			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(uCB.path("/rest/gestionnaire/{id}").buildAndExpand(gestionnaire.getId()).toUri());
-			return new ResponseEntity<>(HttpStatus.CREATED);
+
+	// Ajout gestionnaire:
+	@PostMapping(value = { "/gestionnaire" })
+	public ResponseEntity<Void> insert(@Valid @RequestBody Gestionnaire gestionnaire, BindingResult br,
+			UriComponentsBuilder uCB) {
+		if (br.hasErrors()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
-		//Ajout stagiaire: 
-		@PostMapping(value= {"/stagiaire"})
-		public ResponseEntity<Void> insert(@Valid @RequestBody Stagiaire stagiaire, BindingResult br, UriComponentsBuilder uCB) {
-			if(br.hasErrors()) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			daoStagiaire.save(stagiaire);
-			//Ça nous donne une uri, important car dans une reponse on a un body mais aussi un header
-			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
-			return new ResponseEntity<>(HttpStatus.CREATED);
+		daoGestionnaire.save(gestionnaire);
+		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
+		// un header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(uCB.path("/rest/gestionnaire/{id}").buildAndExpand(gestionnaire.getId()).toUri());
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	// Ajout stagiaire:
+	@PostMapping(value = { "/stagiaire" })
+	public ResponseEntity<Void> insert(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
+			UriComponentsBuilder uCB) {
+		if (br.hasErrors()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
-		//Ajout technicien: 
-				@PostMapping(value= {"/technicien"})
-				public ResponseEntity<Void> insert(@Valid @RequestBody Technicien technicien, BindingResult br, UriComponentsBuilder uCB) {
-					if(br.hasErrors()) {
-						return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-					}
-					daoTechnicien.save(technicien);
-					//Ça nous donne une uri, important car dans une reponse on a un body mais aussi un header
-					HttpHeaders headers = new HttpHeaders();
-					headers.setLocation(uCB.path("/rest/technicien/{id}").buildAndExpand(technicien.getId()).toUri());
-					return new ResponseEntity<>(HttpStatus.CREATED);
-				}
-	
+		daoStagiaire.save(stagiaire);
+		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
+		// un header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	// Ajout technicien:
+	@PostMapping(value = { "/technicien" })
+	public ResponseEntity<Void> insert(@Valid @RequestBody Technicien technicien, BindingResult br,
+			UriComponentsBuilder uCB) {
+		if (br.hasErrors()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		daoTechnicien.save(technicien);
+		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
+		// un header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(uCB.path("/rest/technicien/{id}").buildAndExpand(technicien.getId()).toUri());
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
 //	READ pour:
 	
 	//Tout le monde: personne
 	@JsonView(JsonViews.User.class)
-	@GetMapping(value = {"","/"})
+	@GetMapping(value = {"","/all"})
 	public ResponseEntity<List<Personne>> findAll() {
 		return new ResponseEntity<List<Personne>>(daoPersonne.findAll(), HttpStatus.OK);
 	}
@@ -121,11 +132,35 @@ public class UserRestController {
 		return new ResponseEntity<List<Formateur>>(daoFormateur.findAll(), HttpStatus.OK);
 	}
 	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/formateur/{id}")
+	public ResponseEntity<Formateur> findFormateurById(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//Gestionnaires
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = {"/gestionnaires"})
 	public ResponseEntity<List<Gestionnaire>> findAllGestionnaires() {
 		return new ResponseEntity<List<Gestionnaire>>(daoGestionnaire.findAll(), HttpStatus.OK);
+	}
+	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/gestionnaire/{id}")
+	public ResponseEntity<Gestionnaire> findGestionnaireById(@PathVariable(name="id") Integer id){
+		Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Gestionnaire>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	//Stagiaires
@@ -135,13 +170,55 @@ public class UserRestController {
 		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
 	}
 	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/stagiaire/{id}")
+	public ResponseEntity<Stagiaire> findStagiaireById(@PathVariable(name="id") Integer id){
+		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//Techniciens
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = {"/techniciens"})
 	public ResponseEntity<List<Technicien>> findAllTechniciens() {
 		return new ResponseEntity<List<Technicien>>(daoTechnicien.findAll(), HttpStatus.OK);
 	}
+	
+	@JsonView(JsonViews.User.class)
+	@GetMapping("/technicien/{id}")
+	public ResponseEntity<Formateur> findTechniciensById(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
+//UPDATE pour: 
+	
+	@PutMapping("/formateur/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name="id") Integer id, @Valid @RequestBody Formateur formateur, BindingResult br) {
+        if (br.hasErrors()){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } else {
+            Optional<Formateur> opt = daoFormateur.findById(id);
+            if(opt.isPresent()) {
+                formateur.setVersion(opt.get().getVersion());
+                formateur.setId(id);
+                daoFormateur.save(formateur);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }    
+    }
 
 
 }

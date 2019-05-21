@@ -23,63 +23,68 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
-import fr.projet.lafactory.dao.IDAOStagiaire;
-import fr.projet.lafactory.model.Stagiaire;
+import fr.projet.lafactory.dao.IDAOEnseignement;
+import fr.projet.lafactory.model.Enseignement;
 import fr.projet.lafactory.model.view.JsonViews;
 
 @RestController
-@RequestMapping("/rest/stagiaire")
+@RequestMapping("/rest/enseignement")
 @CrossOrigin(origins = "*")
-public class StagiaireRestController {
+public class EnseignementRestController {
 
 	@Autowired
-	private IDAOStagiaire daoStagiaire;
+	private IDAOEnseignement daoEnseignement;
 
 	// --- READ ---
 	@JsonView(JsonViews.User.class)
 	@GetMapping(value = { "", "/" })
-	public ResponseEntity<List<Stagiaire>> findAll() {
-		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Enseignement>> findAll() {
+		return new ResponseEntity<List<Enseignement>>(daoEnseignement.findAll(), HttpStatus.OK);
+	}
+
+	@JsonView(JsonViews.EnseignementAvecMatiere.class)
+	@GetMapping("/matiere")
+	public List<Enseignement> findAllEnseignementMatiere() {
+		return daoEnseignement.findAll();
 	}
 	
-	@JsonView(JsonViews.StagiaireAvecFormation.class)
-	@GetMapping("/formation")
-	public List<Stagiaire> findAllStagiaire(){
-		return daoStagiaire.findAll();
+	@JsonView(JsonViews.EnseignementAvecFormateur.class)
+	@GetMapping("/formateur")
+	public List<Enseignement> findAllEnseignementFormateur() {
+		return daoEnseignement.findAll();
 	}
-	
+
 
 	// --- By ID ---
 	@GetMapping("/{id}")
-	public ResponseEntity<Stagiaire> findById(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+	public ResponseEntity<Enseignement> findById(@PathVariable(name = "id") Integer id) {
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	// -- By ID avec Formation --
-	@JsonView(JsonViews.StagiaireAvecFormation.class)
-	@GetMapping("/{id}/formation")
-	public ResponseEntity<Stagiaire> findByIdAvecFormation(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+	// -- By ID avec ---
+
+	@JsonView(JsonViews.EnseignementAvecMatiere.class)
+	@GetMapping("/{id}/matiere")
+	public ResponseEntity<Enseignement> findByIdWithMatiere(@PathVariable(name = "id") Integer id) {
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
-	// -- By ID avec Ordinateur --
-	@JsonView(JsonViews.StagiaireAvecOrdinateur.class)
-	@GetMapping("/{id}/ordinateur")
-	public ResponseEntity<Stagiaire> findByIdAvecOrdinateur(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+	
+	@JsonView(JsonViews.EnseignementAvecFormateur.class)
+	@GetMapping("/{id}/formateur")
+	public ResponseEntity<Enseignement> findByIdWithFormateur(@PathVariable(name = "id") Integer id) {
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Enseignement>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -87,32 +92,32 @@ public class StagiaireRestController {
 
 	// --- CREATE ---
 
-	@JsonView(JsonViews.Stagiaire.class)
+	@JsonView(JsonViews.Enseignement.class)
 	@PostMapping(value = { "", "/" })
-	public ResponseEntity<Void> insert(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
+	public ResponseEntity<Void> insert(@Valid @RequestBody Enseignement enseignement, BindingResult br,
 			UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		daoStagiaire.save(stagiaire);
+		daoEnseignement.save(enseignement);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uCB.path("/rest/stagiaire/{id}").buildAndExpand(stagiaire.getId()).toUri());
+		headers.setLocation(uCB.path("/rest/enseignement/{id}").buildAndExpand(enseignement.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	// --- UPDATE ---
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Stagiaire stagiaire,
-			BindingResult br) {
+	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id,
+			@Valid @RequestBody Enseignement enseignement, BindingResult br) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-			stagiaire.setVersion(opt.get().getVersion());
-			stagiaire.setId(id);
-			daoStagiaire.save(stagiaire);
+			enseignement.setVersion(opt.get().getVersion());
+			enseignement.setidFormateur(id);
+			daoEnseignement.save(enseignement);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -122,9 +127,9 @@ public class StagiaireRestController {
 	// --- DELETE ---
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		Optional<Enseignement> opt = daoEnseignement.findById(id);
 		if (opt.isPresent()) {
-			daoStagiaire.deleteById(id);
+			daoEnseignement.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

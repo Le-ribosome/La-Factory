@@ -6,11 +6,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Enseignement")
 public class Enseignement {
 
+	@Version
+	private int version;
+	
 	@EmbeddedId
 	private EnseignementID id;
 

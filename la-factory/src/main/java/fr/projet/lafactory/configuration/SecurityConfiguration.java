@@ -31,11 +31,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
 
 		//a REMETTRE  Quand cryptage mdp OK: 
-
-//		http.authorizeRequests().antMatchers("/rest/**").authenticated()
-//		.and().httpBasic().and().csrf().disable();
+		http.authorizeRequests().antMatchers("/rest/**").authenticated()
+		.and().httpBasic().and().csrf().disable();
 	
-		http.authorizeRequests().antMatchers("/rest/**").permitAll().and().csrf().disable();
+		//pour tout autoriser : 
+		//http.authorizeRequests().antMatchers("/rest/**").permitAll().and().csrf().disable();
 		
 	}
 	

@@ -23,75 +23,66 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import fr.projet.lafactory.dao.IDAOSalle;
-import fr.projet.lafactory.model.Salle;
+import fr.projet.lafactory.dao.IDAOFormateur;
+import fr.projet.lafactory.model.Formateur;
 import fr.projet.lafactory.model.view.JsonViews;
 
 @RestController
-@RequestMapping("/rest/salle")
+@RequestMapping("/rest/formateur")
 @CrossOrigin(origins = "*")
-public class SalleRestController {
+public class FormateurRestController {
 
 	@Autowired
-	private IDAOSalle daoSalle;
+	private IDAOFormateur daoFormateur;
 
 	// --- READ ---
+	@JsonView(JsonViews.User.class)
 	@GetMapping(value = { "", "/" })
-	@JsonView(JsonViews.Salle.class)
-	public ResponseEntity<List<Salle>> findAll() {
-		return new ResponseEntity<List<Salle>>(daoSalle.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Formateur>> findAll() {
+		return new ResponseEntity<List<Formateur>>(daoFormateur.findAll(), HttpStatus.OK);
 	}
+	
 
-	// -- By ID ---
+	// --- By ID ---
 	@GetMapping("/{id}")
-	public ResponseEntity<Salle> findById(@PathVariable(name = "id") Integer id) {
-		Optional<Salle> opt = daoSalle.findById(id);
+	public ResponseEntity<Formateur> findById(@PathVariable(name = "id") Integer id) {
+		Optional<Formateur> opt = daoFormateur.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Salle>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	// -- By ID avec Videoproj --
-	@JsonView(JsonViews.SalleAvecVideoprojecteur.class)
-	@GetMapping("/{id}/videoprojecteur")
-	public ResponseEntity<Salle> findByIdAvecVideoprojecteur(@PathVariable(name = "id") Integer id) {
-		Optional<Salle> opt = daoSalle.findById(id);
-		if (opt.isPresent()) {
-			return new ResponseEntity<Salle>(opt.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
 
 	// --- CREATE ---
 
-	@JsonView(JsonViews.Salle.class)
+	@JsonView(JsonViews.Formateur.class)
 	@PostMapping(value = { "", "/" })
-	public ResponseEntity<Void> insert(@Valid @RequestBody Salle salle, BindingResult br, UriComponentsBuilder uCB) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Formateur formateur, BindingResult br,
+			UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		daoSalle.save(salle);
+		daoFormateur.save(formateur);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uCB.path("/rest/salle/{id}").buildAndExpand(salle.getId()).toUri());
+		headers.setLocation(uCB.path("/rest/module/{id}").buildAndExpand(formateur.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	// --- UPDATE ---
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Salle salle,
+	public ResponseEntity<Void> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Formateur formateur,
 			BindingResult br) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Salle> opt = daoSalle.findById(id);
+		Optional<Formateur> opt = daoFormateur.findById(id);
 		if (opt.isPresent()) {
-			salle.setVersion(opt.get().getVersion());
-			salle.setId(id);
-			daoSalle.save(salle);
+			formateur.setVersion(opt.get().getVersion());
+			formateur.setId(id);
+			daoFormateur.save(formateur);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,13 +92,12 @@ public class SalleRestController {
 	// --- DELETE ---
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Integer id) {
-		Optional<Salle> opt = daoSalle.findById(id);
+		Optional<Formateur> opt = daoFormateur.findById(id);
 		if (opt.isPresent()) {
-			daoSalle.deleteById(id);
+			daoFormateur.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 }
