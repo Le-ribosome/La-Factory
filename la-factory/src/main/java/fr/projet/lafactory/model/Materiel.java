@@ -25,4 +25,30 @@ public class Materiel {
 		boolean estDispo = true;
 		return estDispo;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public float getCoutJournee() {
+		return coutJournee;
+	}
+
+	public void setCoutJournee(float coutJournee) {
+		this.coutJournee = coutJournee;
+	}
+	
+	
 }
