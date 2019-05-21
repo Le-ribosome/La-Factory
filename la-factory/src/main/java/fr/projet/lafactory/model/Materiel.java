@@ -28,6 +28,14 @@ public class Materiel {
 		this.id = id;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	public String getCode() {
 		return code;
 	}
