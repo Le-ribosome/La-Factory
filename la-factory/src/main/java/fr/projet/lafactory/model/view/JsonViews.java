@@ -64,6 +64,12 @@ public static class Materiel {
 	public static class Module {
 	}
 	
+	public static class ModuleAvecFormation {
+	}
+	
+	public static class ModuleAvecFormateur {
+	}
+	
 	public static class ModuleAvecMatiere {
 	}
 

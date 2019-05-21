@@ -70,6 +70,7 @@ public class ModuleRestController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
 
 	// -- By ID avec Formation --
 
@@ -82,6 +83,7 @@ public class ModuleRestController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
 
 	// -- By ID avec Matiere --
 
@@ -93,6 +95,7 @@ public class ModuleRestController {
 		return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
 	} else {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	}
 
 	// --- CREATE ---
