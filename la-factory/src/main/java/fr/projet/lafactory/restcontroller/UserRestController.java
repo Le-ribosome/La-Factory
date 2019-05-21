@@ -120,7 +120,7 @@ public class UserRestController {
 	
 	//Tout le monde: personne
 	@JsonView(JsonViews.User.class)
-	@GetMapping(value = {"","/"})
+	@GetMapping(value = {"","/all"})
 	public ResponseEntity<List<Personne>> findAll() {
 		return new ResponseEntity<List<Personne>>(daoPersonne.findAll(), HttpStatus.OK);
 	}

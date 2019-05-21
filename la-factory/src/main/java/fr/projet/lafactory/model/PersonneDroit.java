@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 
 @Entity
 @Table(name = "Personne_droit")
@@ -21,6 +25,7 @@ public class PersonneDroit {
 	@Column(name = "DRO_ID")
 	private Integer id;
 
+	@JsonView(JsonViews.User.class)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "DRO_DROIT")
 	private Droit droit = Droit.DROIT_ALL;
