@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import fr.formation.sopra.sopraSpringBoot.model.Produit;
 import fr.projet.lafactory.dao.IDAOMatiere;
 import fr.projet.lafactory.model.Matiere;
+import fr.projet.lafactory.model.view.JsonViews;
 
 @RestController
 @RequestMapping("/rest/matiere")
