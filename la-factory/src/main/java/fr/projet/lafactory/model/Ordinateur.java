@@ -1,12 +1,13 @@
 package fr.projet.lafactory.model;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -38,7 +39,6 @@ public class Ordinateur extends Materiel{
 	@NotNull
 	private int anneeAchat;
 
-	@JoinColumn(name="ORD_STAGIAIRE_ID")
-	@OneToMany(mappedBy="Stagiaire")
-	private Stagiaire stagiaire;
+	@OneToMany(mappedBy="ordinateur")
+	private List<Stagiaire> stagiaires;
 }
