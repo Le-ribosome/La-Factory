@@ -4,6 +4,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,7 +38,7 @@ public class Ordinateur extends Materiel{
 	@NotNull
 	private int anneeAchat;
 
-	@Column(name="ORD_STAGIAIRE_ID")
+	@JoinColumn(name="ORD_STAGIAIRE_ID")
 	@OneToMany(mappedBy="ordinateur")
 	private Stagiaire stagiaire;
 }
