@@ -16,22 +16,24 @@ public class JsonViews {
 	// --- Materiel ---
 	
 	
+public static class Materiel {
+	
+}
+	
+	public static class Ordinateur extends Materiel{
+	}
+	
+	public static class OrdinateurAvecStagiaire extends Materiel{
+	}
 
-	
-	public static class Ordinateur {
-	}
-	
-	public static class OrdinateurAvecStagiaire {
+	public static class Salle extends Materiel{
 	}
 
-	public static class Salle {
-	}
-
-	public static class SalleAvecVideoprojecteur {
+	public static class SalleAvecVideoprojecteur extends Materiel{
 	}
 	
 	
-	public static class Videoprojecteur {
+	public static class Videoprojecteur extends Materiel{
 	}
 	
 	

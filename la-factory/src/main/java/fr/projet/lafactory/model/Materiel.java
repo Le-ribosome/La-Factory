@@ -9,6 +9,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public class Materiel {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
