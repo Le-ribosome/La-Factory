@@ -10,16 +10,16 @@ import javax.persistence.Version;
 @Embeddable
 public class EnseignementID implements Serializable {
 	
-	@Version
-	private int version;
-	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
+//	@Version
+//	private int version;
+//	
+//	public int getVersion() {
+//		return version;
+//	}
+//
+//	public void setVersion(int version) {
+//		this.version = version;
+//	}
 
 	private static final long serialVersionUID = 1L;
 
