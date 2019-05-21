@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 
 @Entity
 @Table(name="Ordinateur")
@@ -23,18 +27,23 @@ import javax.validation.constraints.NotNull;
 })
 public class Ordinateur extends Materiel{
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_PROCESSEUR", columnDefinition="VARCHAR(100) NOT NULL")
 	private String processeur = "Indiquez le processeur";
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_QUANTITERAM")
 	private int quantiteRAM = 2;
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_QUANTITEDD")
 	private int quantiteDD = 500;
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_ANNEEACHAT")
 	private int anneeAchat = 2019;
 
+	@JsonView(JsonViews.OrdinateurAvecStagiaire.class)
 	@OneToMany(mappedBy="ordinateur")
 	private List<Stagiaire> stagiaires;
 
