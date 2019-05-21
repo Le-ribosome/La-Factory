@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="ordinateur")
+@Table(name="Ordinateur")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="ORD_ID")),
 	@AttributeOverride(name="code", column=@Column(name="ORD_CODE")),
@@ -39,6 +39,6 @@ public class Ordinateur extends Materiel{
 	private int anneeAchat;
 
 	@JoinColumn(name="ORD_STAGIAIRE_ID")
-	@OneToMany(mappedBy="ordinateur")
+	@OneToMany(mappedBy="Stagiaire")
 	private Stagiaire stagiaire;
 }
