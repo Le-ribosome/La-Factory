@@ -66,7 +66,7 @@ public class UserRestController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	//Ajout formateur: 
+	//Ajout gestionnaire: 
 		@PostMapping(value= {"/gestionnaire"})
 		public ResponseEntity<Void> insert(@Valid @RequestBody Gestionnaire gestionnaire, BindingResult br, UriComponentsBuilder uCB) {
 			if(br.hasErrors()) {
