@@ -31,5 +31,11 @@ public class OrdinateurRestController {
 			return new ResponseEntity<List<Ordinateur>>(daoOrdinateur.findAll(), HttpStatus.OK);
 		}
 		
+		// Donne la liste des formateurs accrédités pour chaque matière
+		@JsonView(JsonViews.OrdinateurAvecStagiaire.class)
+		@GetMapping("/stagiaire")
+		public List<Ordinateur> findAllWithOrdinateurs() { 
+			return daoOrdinateur.findAll();
+		}
 	
 }
