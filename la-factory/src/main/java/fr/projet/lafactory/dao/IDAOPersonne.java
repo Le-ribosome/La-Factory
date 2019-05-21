@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import fr.projet.lafactory.model.Personne;
 
 public interface IDAOPersonne extends JpaRepository<Personne, Integer>{
-	@Query("select p from Personne p left join fetch p.droits where p.droit=?1")
+	@Query("select p from Personne p left join fetch p.droits where p.email=?1")
 	public Optional<Personne> findByIdWithDroits(String email);
 }

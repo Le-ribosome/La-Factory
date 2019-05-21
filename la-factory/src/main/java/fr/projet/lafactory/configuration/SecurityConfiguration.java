@@ -30,10 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
 
+		//a REMETTRE  Quand cryptage mdp OK: 
 
-		http.authorizeRequests().antMatchers("/rest/**").authenticated()
-		.and().httpBasic().and().csrf().disable();
+//		http.authorizeRequests().antMatchers("/rest/**").authenticated()
+//		.and().httpBasic().and().csrf().disable();
 	
+		http.authorizeRequests().antMatchers("/rest/**").permitAll().and().csrf().disable();
+		
 	}
 	
 	//pour encrypter un mdp il faut un objet de type password encoder
