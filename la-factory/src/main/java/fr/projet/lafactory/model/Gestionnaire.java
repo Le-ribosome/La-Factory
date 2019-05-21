@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name = "Gestionnaire")
 //@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "GES_ID")),
@@ -18,6 +22,7 @@ import javax.persistence.Table;
 //	@AttributeOverride(name = "version", column = @Column(name = "GES_VERSION")) })
 public class Gestionnaire extends Personne {
 	
+	@JsonView(JsonViews.Gestionnaire.class)
 	@OneToMany(mappedBy="gestionnaire")
 	private List<Formation> formations;
 

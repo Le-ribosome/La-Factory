@@ -126,13 +126,13 @@ public class UserRestController {
 	}
 	
 	//Formateurs
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Formateur.class)
 	@GetMapping(value = {"/formateurs"})
 	public ResponseEntity<List<Formateur>> findAllFormateurs() {
 		return new ResponseEntity<List<Formateur>>(daoFormateur.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Formateur.class)
 	@GetMapping("/formateur/{id}")
 	public ResponseEntity<Formateur> findFormateurById(@PathVariable(name="id") Integer id){
 		Optional<Formateur> opt = daoFormateur.findById(id);
@@ -145,13 +145,13 @@ public class UserRestController {
 	}
 	
 	//Gestionnaires
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@GetMapping(value = {"/gestionnaires"})
 	public ResponseEntity<List<Gestionnaire>> findAllGestionnaires() {
 		return new ResponseEntity<List<Gestionnaire>>(daoGestionnaire.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Gestionnaire.class)
 	@GetMapping("/gestionnaire/{id}")
 	public ResponseEntity<Gestionnaire> findGestionnaireById(@PathVariable(name="id") Integer id){
 		Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
@@ -164,13 +164,13 @@ public class UserRestController {
 	}
 	
 	//Stagiaires
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Stagiaire.class)
 	@GetMapping(value = {"/stagiaires"})
 	public ResponseEntity<List<Stagiaire>> findAllStagiaires() {
 		return new ResponseEntity<List<Stagiaire>>(daoStagiaire.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Stagiaire.class)
 	@GetMapping("/stagiaire/{id}")
 	public ResponseEntity<Stagiaire> findStagiaireById(@PathVariable(name="id") Integer id){
 		Optional<Stagiaire> opt = daoStagiaire.findById(id);
@@ -183,18 +183,18 @@ public class UserRestController {
 	}
 	
 	//Techniciens
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Technicien.class)
 	@GetMapping(value = {"/techniciens"})
 	public ResponseEntity<List<Technicien>> findAllTechniciens() {
 		return new ResponseEntity<List<Technicien>>(daoTechnicien.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Technicien.class)
 	@GetMapping("/technicien/{id}")
-	public ResponseEntity<Formateur> findTechniciensById(@PathVariable(name="id") Integer id){
-		Optional<Formateur> opt = daoFormateur.findById(id);
+	public ResponseEntity<Technicien> findTechniciensById(@PathVariable(name="id") Integer id){
+		Optional<Technicien> opt = daoTechnicien.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Formateur>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Technicien>(opt.get(), HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

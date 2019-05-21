@@ -15,6 +15,10 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 @Entity
 @Table(name="Indisponibilite")
 public class Indisponibilite {
@@ -35,11 +39,13 @@ public class Indisponibilite {
 	@Column(name = "IND_ID")
 	private int id;
 
+	@JsonView(JsonViews.Formateur.class)
 	@Column(name = "IND_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
+	@JsonView(JsonViews.Formateur.class)
 	@Column(name = "IND_DATEFIN")
 	@NotNull
 	@Temporal(TemporalType.DATE)
