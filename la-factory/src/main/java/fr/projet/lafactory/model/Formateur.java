@@ -12,7 +12,7 @@ import javax.persistence.Table;
 //		@AttributeOverride(name = "nom", column = @Column(name = "FOR_NOM")),
 //		@AttributeOverride(name = "prenom", column = @Column(name = "FOR_PRENOM")),
 //		@AttributeOverride(name = "adresse", column = @Column(name = "FOR_ADRESSE")),
-//		@AttributeOverride(name = "email", column = @Column(name = "FOR_ADRESSE")),
+//		@AttributeOverride(name = "email", column = @Column(name = "FOR_EMAIL")),
 //		@AttributeOverride(name = "telephone", column = @Column(name = "FOR_TELEPHONE")),
 //		@AttributeOverride(name = "motDePasse", column = @Column(name = "FOR_MOTDEPASSE")),
 //		@AttributeOverride(name = "version", column = @Column(name = "FOR_VERSION")) })
