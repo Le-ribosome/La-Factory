@@ -5,9 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.projet.lafactory.dao.IDAOFormateur;
 import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.dao.IDAOPersonneDroit;
 import fr.projet.lafactory.model.Droit;
+import fr.projet.lafactory.model.Formateur;
 import fr.projet.lafactory.model.Personne;
 import fr.projet.lafactory.model.PersonneDroit;
 
@@ -21,6 +23,8 @@ public class ApplicationServiceConsole implements CommandLineRunner { // pour av
 	private IDAOPersonneDroit daoPersonneDroit;
 	@Autowired
 	private PasswordEncoder pass;
+	@Autowired
+	private IDAOFormateur daoFormateur;
 	
 	
 	@Override
@@ -29,11 +33,15 @@ public class ApplicationServiceConsole implements CommandLineRunner { // pour av
 		
 		Droit d = Droit.DROIT_ADMIN;
 		
+//		Formateur f = new Formateur();
+//		f.setEmail("formateur@formateur.fr");
+//		f.set
+		
 		//on crée les personnes avec leur mot de passe encrypté
 //		Personne p = new Personne();
 //		p.setEmail("marie@marie.fr");
 //		p.setMotDePasse(pass.encode("marie"));
-//		PersonneDroit pDroit = new PersonneDroit();
+//		
 //		pDroit.setDroit(d);
 //		pDroit.setPersonne(p);
 //		daoPersonne.save(p);
