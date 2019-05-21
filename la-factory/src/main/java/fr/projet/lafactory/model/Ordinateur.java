@@ -17,27 +17,23 @@ import javax.validation.constraints.NotNull;
 @Table(name="Ordinateur")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="ORD_ID")),
+	@AttributeOverride(name="version", column=@Column(name="ORD_VERSION")),
 	@AttributeOverride(name="code", column=@Column(name="ORD_CODE")),
 	@AttributeOverride(name="coutJournee", column=@Column(name="ORD_COUTJOURNEE"))
 })
 public class Ordinateur extends Materiel{
 	
 	@Column(name="ORD_PROCESSEUR", columnDefinition="VARCHAR(100) NOT NULL")
-	@NotEmpty
-	@NotNull
-	private String processeur;
+	private String processeur = "Indiquez le processeur";
 	
 	@Column(name="ORD_QUANTITERAM")
-	@NotNull
-	private int quantiteRAM;
+	private int quantiteRAM = 2;
 	
 	@Column(name="ORD_QUANTITEDD")
-	@NotNull
-	private int quantitedd;
+	private int quantiteDD = 500;
 	
 	@Column(name="ORD_ANNEEACHAT")
-	@NotNull
-	private int anneeAchat;
+	private int anneeAchat = 2019;
 
 	@OneToMany(mappedBy="ordinateur")
 	private List<Stagiaire> stagiaires;
@@ -58,12 +54,12 @@ public class Ordinateur extends Materiel{
 		this.quantiteRAM = quantiteRAM;
 	}
 
-	public int getQuantitedd() {
-		return quantitedd;
+	public int getQuantiteDD() {
+		return quantiteDD;
 	}
 
-	public void setQuantitedd(int quantitedd) {
-		this.quantitedd = quantitedd;
+	public void setQuantiteDD(int quantiteDD) {
+		this.quantiteDD = quantiteDD;
 	}
 
 	public int getAnneeAchat() {

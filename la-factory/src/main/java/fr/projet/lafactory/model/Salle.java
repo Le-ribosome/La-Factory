@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Salle")
 @AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "SAL_ID")),
+		@AttributeOverride(name = "version", column = @Column(name = "SAL_VERSION")),
 		@AttributeOverride(name = "code", column = @Column(name = "SAL_CODE")),
 		@AttributeOverride(name = "coutJournee", column = @Column(name = "SAL_COUTJOURNEE")) })
 public class Salle extends Materiel {

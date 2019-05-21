@@ -16,12 +16,12 @@ public class Enseignement {
 
 	@ManyToOne()
     @MapsId("ENS_FORMATEUR_ID")
-	@JoinColumn(name = "ENS_FORMATEUR_ID")
+	@JoinColumn(name = "ENS_FORMATEUR_ID", insertable = false, updatable = false)
 	private Formateur formateur;
 
 	@ManyToOne()
     @MapsId("ENS_MATIERE_ID")
-	@JoinColumn(name = "ENS_MATIERE_ID")
+	@JoinColumn(name = "ENS_MATIERE_ID", insertable = false, updatable = false)
 	private Matiere matiere;
 
 	public EnseignementID getId() {

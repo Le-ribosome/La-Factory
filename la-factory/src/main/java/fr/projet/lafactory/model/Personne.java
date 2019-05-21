@@ -25,15 +25,12 @@ public class Personne {
 	private int id;
 
 	@Column(name="PER_NOM")
-	@NotNull
 	private String nom;
 
 	@Column(name="PER_PRENOM")
-	@NotNull
 	private String prenom;
 
 	@Column(name="PER_ADRESSE")
-	@NotNull
 	private String adresse;
 
 	@Column(name="PER_EMAIL")
@@ -41,7 +38,6 @@ public class Personne {
 	private String email;
 
 	@Column(name="PER_TELEPHONE")
-	@NotNull
 	private String telephone;
 
 	@Column(name="PER_MOTDEPASSE")
