@@ -12,11 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Indisponibilite")
 public class Indisponibilite {
+
+	@Version
+	private int version;
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
