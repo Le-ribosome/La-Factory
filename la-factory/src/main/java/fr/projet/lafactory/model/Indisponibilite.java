@@ -12,38 +12,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Module")
-public class Module {
+@Table(name="Indisponibilite")
+public class Indisponibilite {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "MOD_ID")
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "IND_ID")
 	private int id;
 
-	@Column(name = "MOD_DATEDEBUT")
+	@Column(name = "IND_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
-	@Column(name = "MOD_VERSION")
-	@Version
-	private int version;
-
+	@Column(name = "IND_DATEFIN")
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date dateFin;
+	
 	@ManyToOne()
-	@JoinColumn(name = "MOD_MATIERE_ID", nullable = true)
-	private Matiere matiere;
-
-	@ManyToOne()
-	@JoinColumn(name = "MOD_FORMATEUR_ID", nullable = true)
+	@JoinColumn(name = "IND_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;
-
-	@ManyToOne()
-	@JoinColumn(name = "MOD_FORMATION_ID", nullable = true)
-	private Formation formation;
 
 	public int getId() {
 		return id;
@@ -61,20 +53,12 @@ public class Module {
 		this.dateDebut = dateDebut;
 	}
 
-	public int getVersion() {
-		return version;
+	public Date getDateFin() {
+		return dateFin;
 	}
 
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public Matiere getMatiere() {
-		return matiere;
-	}
-
-	public void setMatiere(Matiere matiere) {
-		this.matiere = matiere;
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
 	}
 
 	public Formateur getFormateur() {
@@ -84,13 +68,5 @@ public class Module {
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
 	}
-
-	public Formation getFormation() {
-		return formation;
-	}
-
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
-
+	
 }

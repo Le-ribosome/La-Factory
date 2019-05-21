@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Videoprojecteur")
 @AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "VID_ID")),
+		@AttributeOverride(name = "version", column = @Column(name = "VID_VERSION")),
 		@AttributeOverride(name = "code", column = @Column(name = "VID_CODE")),
 		@AttributeOverride(name = "coutJournee", column = @Column(name = "VID_COUTJOURNEE")) })
 

@@ -12,33 +12,38 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.projet.lafactory.model.view.JsonViews;
+
 
 @Entity
 @Table(name="Ordinateur")
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="ORD_ID")),
+	@AttributeOverride(name="version", column=@Column(name="ORD_VERSION")),
 	@AttributeOverride(name="code", column=@Column(name="ORD_CODE")),
 	@AttributeOverride(name="coutJournee", column=@Column(name="ORD_COUTJOURNEE"))
 })
 public class Ordinateur extends Materiel{
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_PROCESSEUR", columnDefinition="VARCHAR(100) NOT NULL")
-	@NotEmpty
-	@NotNull
-	private String processeur;
+	private String processeur = "Indiquez le processeur";
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_QUANTITERAM")
-	@NotNull
-	private int quantiteRAM;
+	private int quantiteRAM = 2;
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_QUANTITEDD")
-	@NotNull
-	private int quantitedd;
+	private int quantiteDD = 500;
 	
+	@JsonView(JsonViews.Ordinateur.class)
 	@Column(name="ORD_ANNEEACHAT")
-	@NotNull
-	private int anneeAchat;
+	private int anneeAchat = 2019;
 
+	@JsonView(JsonViews.OrdinateurAvecStagiaire.class)
 	@OneToMany(mappedBy="ordinateur")
 	private List<Stagiaire> stagiaires;
 
@@ -58,12 +63,12 @@ public class Ordinateur extends Materiel{
 		this.quantiteRAM = quantiteRAM;
 	}
 
-	public int getQuantitedd() {
-		return quantitedd;
+	public int getQuantiteDD() {
+		return quantiteDD;
 	}
 
-	public void setQuantitedd(int quantitedd) {
-		this.quantitedd = quantitedd;
+	public void setQuantiteDD(int quantiteDD) {
+		this.quantiteDD = quantiteDD;
 	}
 
 	public int getAnneeAchat() {
