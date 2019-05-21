@@ -7,6 +7,10 @@ public class JsonViews {
 	public static class User {
 	}
 	
+	public static class Gestionnaire {
+	}
+	
+	
 	public static class Stagiaire {
 	}
 	
@@ -15,6 +19,10 @@ public class JsonViews {
 	
 	public static class StagiaireAvecOrdinateur {
 	}
+	
+	public static class Technicien {
+	}
+	
 	
 	// --- Materiel ---
 	
@@ -39,6 +47,8 @@ public static class Materiel {
 	public static class Videoprojecteur extends Materiel{
 	}
 	
+	public static class VideoprojecteurAvecSalle {
+	}
 	
 	
 	// --- Formation ---

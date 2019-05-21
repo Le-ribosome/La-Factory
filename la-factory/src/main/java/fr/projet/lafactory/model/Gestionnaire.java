@@ -1,6 +1,9 @@
 package fr.projet.lafactory.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,5 +17,8 @@ import javax.persistence.Table;
 //	@AttributeOverride(name = "motDePasse", column = @Column(name = "GES_MOTDEPASSE")),
 //	@AttributeOverride(name = "version", column = @Column(name = "GES_VERSION")) })
 public class Gestionnaire extends Personne {
+	
+	@OneToMany(mappedBy="Formation")
+	private List<Formation> formations;
 
 }
