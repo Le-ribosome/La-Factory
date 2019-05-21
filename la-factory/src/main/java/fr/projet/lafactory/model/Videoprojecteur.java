@@ -16,8 +16,15 @@ import javax.persistence.Table;
 
 public class Videoprojecteur extends Materiel {
 
-	@JoinColumn(name = "VID_SALLE_ID", nullable = true)
 	@OneToOne(mappedBy = "videoprojecteur")
 	private Salle salle;
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
 
 }
