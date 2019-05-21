@@ -1,4 +1,4 @@
-package fr.projet.restcontroller;
+package fr.projet.lafactory.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
