@@ -1,6 +1,5 @@
 package fr.projet.lafactory.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import fr.projet.lafactory.dao.IDAOFormateur;
 import fr.projet.lafactory.dao.IDAOGestionnaire;
 import fr.projet.lafactory.dao.IDAOPersonne;
+import fr.projet.lafactory.dao.IDAOPersonneDroit;
 import fr.projet.lafactory.dao.IDAOStagiaire;
 import fr.projet.lafactory.dao.IDAOTechnicien;
 import fr.projet.lafactory.model.Droit;
@@ -57,6 +57,9 @@ public class UserRestController {
 	
 	@Autowired
 	private IDAOTechnicien daoTechnicien;
+
+	@Autowired
+	private IDAOPersonneDroit daoPersonnedroit;
 	
 //CREATE pour: 
 	
@@ -67,12 +70,11 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		List<PersonneDroit> droits = new ArrayList<PersonneDroit>();
-		PersonneDroit pd = new PersonneDroit();
-		pd.setDroit(Droit.DROIT_FORMATEUR);
-		droits.add(pd);
-		formateur.setDroits(droits);
 		daoFormateur.save(formateur);
+		PersonneDroit personneDroit = new PersonneDroit();
+		personneDroit.setPersonne(formateur);
+		personneDroit.setDroit(Droit.DROIT_FORMATEUR);
+		daoPersonnedroit.save(personneDroit);
 		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
 		// un header
 		HttpHeaders headers = new HttpHeaders();
