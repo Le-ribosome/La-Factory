@@ -29,7 +29,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 import fr.projet.lafactory.model.view.JsonViews.FormationAvecSalle;
 
 @RestController
-@RequestMapping("/rest/formation")
+@RequestMapping("/rest/formations")
 @CrossOrigin(origins = "*")
 public class FormationRestController {
 
