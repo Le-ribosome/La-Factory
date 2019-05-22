@@ -10,5 +10,6 @@ import fr.projet.lafactory.model.Module;
 public interface IDAOModule extends JpaRepository<Module, Integer>{
 
 	public List<Module> findAllByFormation(Formation formation);
+	public List<Module> findAllByFormationId(int id);
 	
 }

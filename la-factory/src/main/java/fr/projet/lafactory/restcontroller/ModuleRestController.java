@@ -23,7 +23,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.projet.lafactory.dao.IDAOFormation;
 import fr.projet.lafactory.dao.IDAOModule;
+import fr.projet.lafactory.model.Formation;
 import fr.projet.lafactory.model.Module;
 import fr.projet.lafactory.model.view.JsonViews;
 
@@ -34,6 +36,9 @@ public class ModuleRestController {
 
 	@Autowired
 	private IDAOModule daoModule;
+	
+	@Autowired
+	private IDAOFormation daoFormation;
 
 	// --- READ ---
 	@JsonView(JsonViews.User.class)
@@ -61,6 +66,34 @@ public class ModuleRestController {
 	}
 
 //	Chercher un module par formation, pour le formation edit angular: 
+	
+//	@GetMapping("/byFormation/{id}")
+//	public ResponseEntity<List<Module>> findByFormation(@PathVariable(name = "id") Integer id) {
+//		Optional<Formation> formation = daoFormation.findById(id);
+//		
+//		if (formation.isPresent()) {
+//			List<Module> opt = daoModule.findAllByFormation(formation.get());
+//			if (opt.size()!=0) {
+//				return new ResponseEntity<List<Module>>(opt, HttpStatus.OK);
+//			} else {
+//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//			}
+//		}
+//		else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//			
+//	}
+	
+	@GetMapping("/byFormation/{id}")
+	public ResponseEntity<List<Module>> findByFormation(@PathVariable(name = "id") Integer id) {
+		List<Module> listeModules = daoModule.findAllByFormationId(id);
+			if (listeModules.size()>=0) {
+				return new ResponseEntity<List<Module>>(listeModules, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		}
 	
 	
 	// --- By ID ---
