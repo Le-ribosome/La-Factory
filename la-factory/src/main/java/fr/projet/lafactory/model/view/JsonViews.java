@@ -36,6 +36,9 @@ public class JsonViews {
 
 	public static class SalleAvecVideoprojecteur extends Salle {
 	}
+	
+	public static class SalleAvecFormations extends Salle {
+	}
 
 	public static class Videoprojecteur extends Materiel {
 	}

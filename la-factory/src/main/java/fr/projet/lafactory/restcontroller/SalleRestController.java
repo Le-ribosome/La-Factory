@@ -65,6 +65,17 @@ public class SalleRestController {
 		}
 	}
 
+	// -- By ID avec Formations --
+	@JsonView(JsonViews.SalleAvecFormations.class)
+	@GetMapping("/{id}/formations")
+	public ResponseEntity<Salle> findByIdAvecFormations(@PathVariable(name = "id") Integer id) {
+		Optional<Salle> opt = daoSalle.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Salle>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 	// --- CREATE ---
 
 	@JsonView(JsonViews.Salle.class)

@@ -1,10 +1,13 @@
 package fr.projet.lafactory.model;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,6 +34,10 @@ public class Salle extends Materiel {
 	@JoinColumn(name = "SAL_VIDEOPROJECTEUR_ID", nullable = true)
 	private Videoprojecteur videoprojecteur;
 
+	@JsonView(JsonViews.SalleAvecFormations.class)
+	@OneToMany(mappedBy = "salle")
+	private List<Formation> formations;
+	
 	public int getCapacite() {
 		return capacite;
 	}
