@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -277,5 +278,55 @@ public class UserRestController {
             }
         }    
     }
+	
+	
+	@DeleteMapping("/formateur/{id}")
+	public ResponseEntity<Void> deleteFormateur(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			daoFormateur.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@DeleteMapping("/gestionnaire/{id}")
+	public ResponseEntity<Void> deleteGestionnaire(@PathVariable(name="id") Integer id){
+		Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
+		if (opt.isPresent()) {
+			daoGestionnaire.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@DeleteMapping("/stagiaire/{id}")
+	public ResponseEntity<Void> deleteStagiaire(@PathVariable(name="id") Integer id){
+		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		if (opt.isPresent()) {
+			daoStagiaire.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@DeleteMapping("/technicien/{id}")
+	public ResponseEntity<Void> deleteTechnicien(@PathVariable(name="id") Integer id){
+		Optional<Technicien> opt = daoTechnicien.findById(id);
+		if (opt.isPresent()) {
+			daoTechnicien.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }
