@@ -124,6 +124,13 @@ public class UserRestController {
 	public ResponseEntity<List<Personne>> findAll() {
 		return new ResponseEntity<List<Personne>>(daoPersonne.findAll(), HttpStatus.OK);
 	}
+
+	//Une personne avec un email précis: personne
+	@JsonView(JsonViews.User.class)
+	@GetMapping(value = {"/{email}"})
+	public ResponseEntity<Personne> findByEmail(@PathVariable(name="email") String email) {
+		return new ResponseEntity<Personne>(daoPersonne.findByEmail(email).get(), HttpStatus.OK);
+	}
 	
 	//Formateurs
 	@JsonView(JsonViews.Formateur.class)
