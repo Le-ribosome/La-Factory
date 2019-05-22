@@ -60,6 +60,9 @@ public class ModuleRestController {
 		return daoModule.findAll();
 	}
 
+//	Chercher un module par formation, pour le formation edit angular: 
+	
+	
 	// --- By ID ---
 	@GetMapping("/{id}")
 	public ResponseEntity<Module> findById(@PathVariable(name = "id") Integer id) {
