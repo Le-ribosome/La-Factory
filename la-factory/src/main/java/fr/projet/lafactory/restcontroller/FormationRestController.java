@@ -29,7 +29,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 import fr.projet.lafactory.model.view.JsonViews.FormationAvecSalle;
 
 @RestController
-@RequestMapping("/rest/formation")
+@RequestMapping("/rest/formations")
 @CrossOrigin(origins = "*")
 public class FormationRestController {
 
@@ -37,7 +37,7 @@ public class FormationRestController {
 	private IDAOFormation daoFormation;
 
 	// --- READ ---
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Formation.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Formation>> findAll() {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);

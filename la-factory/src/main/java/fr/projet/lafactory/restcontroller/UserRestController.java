@@ -1,5 +1,6 @@
 package fr.projet.lafactory.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +29,11 @@ import fr.projet.lafactory.dao.IDAOGestionnaire;
 import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.dao.IDAOStagiaire;
 import fr.projet.lafactory.dao.IDAOTechnicien;
+import fr.projet.lafactory.model.Droit;
 import fr.projet.lafactory.model.Formateur;
 import fr.projet.lafactory.model.Gestionnaire;
 import fr.projet.lafactory.model.Personne;
+import fr.projet.lafactory.model.PersonneDroit;
 import fr.projet.lafactory.model.Stagiaire;
 import fr.projet.lafactory.model.Technicien;
 import fr.projet.lafactory.model.view.JsonViews;
@@ -63,6 +67,11 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		List<PersonneDroit> droits = new ArrayList<PersonneDroit>();
+		PersonneDroit pd = new PersonneDroit();
+		pd.setDroit(Droit.DROIT_FORMATEUR);
+		droits.add(pd);
+		formateur.setDroits(droits);
 		daoFormateur.save(formateur);
 		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
 		// un header
@@ -277,5 +286,55 @@ public class UserRestController {
             }
         }    
     }
+	
+	
+	@DeleteMapping("/formateur/{id}")
+	public ResponseEntity<Void> deleteFormateur(@PathVariable(name="id") Integer id){
+		Optional<Formateur> opt = daoFormateur.findById(id);
+		if (opt.isPresent()) {
+			daoFormateur.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@DeleteMapping("/gestionnaire/{id}")
+	public ResponseEntity<Void> deleteGestionnaire(@PathVariable(name="id") Integer id){
+		Optional<Gestionnaire> opt = daoGestionnaire.findById(id);
+		if (opt.isPresent()) {
+			daoGestionnaire.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@DeleteMapping("/stagiaire/{id}")
+	public ResponseEntity<Void> deleteStagiaire(@PathVariable(name="id") Integer id){
+		Optional<Stagiaire> opt = daoStagiaire.findById(id);
+		if (opt.isPresent()) {
+			daoStagiaire.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@DeleteMapping("/technicien/{id}")
+	public ResponseEntity<Void> deleteTechnicien(@PathVariable(name="id") Integer id){
+		Optional<Technicien> opt = daoTechnicien.findById(id);
+		if (opt.isPresent()) {
+			daoTechnicien.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }
