@@ -67,12 +67,13 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		List<PersonneDroit> droits = new ArrayList<PersonneDroit>();
-		PersonneDroit pd = new PersonneDroit();
-		pd.setDroit(Droit.DROIT_FORMATEUR);
-		droits.add(pd);
-		formateur.setDroits(droits);
 		daoFormateur.save(formateur);
+// Test pour ajouter les droits au formateur		
+//			daoFormateur.save(formateur);
+//			PersonneDroit personneDroit = new PersonneDroit();
+//			personneDroit.setPersonne(formateur);
+//			personneDroit.setDroit(Droit.DROIT_FORMATEUR);
+//			daoPersonnedroit.save(personneDroit);
 		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
 		// un header
 		HttpHeaders headers = new HttpHeaders();
