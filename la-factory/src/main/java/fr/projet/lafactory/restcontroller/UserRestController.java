@@ -1,5 +1,6 @@
 package fr.projet.lafactory.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +29,11 @@ import fr.projet.lafactory.dao.IDAOGestionnaire;
 import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.dao.IDAOStagiaire;
 import fr.projet.lafactory.dao.IDAOTechnicien;
+import fr.projet.lafactory.model.Droit;
 import fr.projet.lafactory.model.Formateur;
 import fr.projet.lafactory.model.Gestionnaire;
 import fr.projet.lafactory.model.Personne;
+import fr.projet.lafactory.model.PersonneDroit;
 import fr.projet.lafactory.model.Stagiaire;
 import fr.projet.lafactory.model.Technicien;
 import fr.projet.lafactory.model.view.JsonViews;
@@ -64,6 +67,11 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		List<PersonneDroit> droits = new ArrayList<PersonneDroit>();
+		PersonneDroit pd = new PersonneDroit();
+		pd.setDroit(Droit.DROIT_FORMATEUR);
+		droits.add(pd);
+		formateur.setDroits(droits);
 		daoFormateur.save(formateur);
 		// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
 		// un header
