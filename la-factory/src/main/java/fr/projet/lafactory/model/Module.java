@@ -28,7 +28,7 @@ public class Module {
 	@Column(name = "MOD_ID")
 	private int id;
 
-	@JsonView(JsonViews.Gestionnaire.class)
+	@JsonView(JsonViews.Module.class)
 	@Column(name = "MOD_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -38,16 +38,17 @@ public class Module {
 	@Version
 	private int version;
 
-	@JsonView(JsonViews.Gestionnaire.class)
+	@JsonView(JsonViews.ModuleAvecMatiere.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_MATIERE_ID", nullable = true)
 	private Matiere matiere;
 
-	@JsonView(JsonViews.Gestionnaire.class)
+	@JsonView(JsonViews.ModuleAvecFormateur.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;
 
+	@JsonView(JsonViews.ModuleAvecFormation.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATION_ID", nullable = true)
 	private Formation formation;

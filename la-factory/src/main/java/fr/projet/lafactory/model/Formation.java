@@ -30,14 +30,19 @@ public class Formation {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "FMT_ID")
 	private int id;
+	
+	@JsonView(JsonViews.Formation.class)
+	@Column(name = "FMT_TITRE")
+	@NotNull
+	private String titre;
 
-	@JsonView(JsonViews.Gestionnaire.class)
+	@JsonView(JsonViews.Formation.class)
 	@Column(name = "FMT_DATEDEBUT")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 
-	@JsonView(JsonViews.Gestionnaire.class)
+	@JsonView(JsonViews.Formation.class)
 	@Column(name = "FMT_DATEFIN")
 	@NotNull
 	@Temporal(TemporalType.DATE)
