@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,6 +61,12 @@ public class UserRestController {
 	@Autowired
 	private IDAOAdministrateur daoAdministrateur;
 	
+	// les mots de passe seront encodés dès création d'une personne (formateur, stagiaire, etc.)
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	// passwordEncoder.encode(user.getUsername();
+	
 //CREATE pour: 
 	
 	// Ajout formateur:
@@ -69,6 +76,10 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		
+		// encrypte le mdp avant de sauvegarder dans la base
+		formateur.setMotDePasse(passwordEncoder.encode(formateur.getMotDePasse()));
+		
 		daoFormateur.save(formateur);
 // Test pour ajouter les droits au formateur		
 //			daoFormateur.save(formateur);
