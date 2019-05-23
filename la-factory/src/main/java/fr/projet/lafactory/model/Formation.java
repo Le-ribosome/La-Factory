@@ -58,11 +58,13 @@ public class Formation {
 	private Gestionnaire gestionnaire;
 
 	@JsonView(JsonViews.FormationAvecSalle.class)
+	//@JsonView({JsonViews.FormationAvecSalle.class, JsonViews.FormationAvecModuleEtSalle.class})
 	@ManyToOne()
 	@JoinColumn(name = "FMT_SALLE_ID", nullable = true)
 	private Salle salle;
 
 	@JsonView(JsonViews.FormationAvecModule.class)
+	//@JsonView({JsonViews.FormationAvecModule.class, JsonViews.FormationAvecModuleEtSalle.class})
 	@OneToMany(mappedBy = "formation")
 	private List<Module> modules;
 
