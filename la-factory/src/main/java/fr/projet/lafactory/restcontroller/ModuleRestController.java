@@ -180,6 +180,19 @@ public class ModuleRestController {
 		headers.setLocation(uCB.path("/rest/module/{id}").buildAndExpand(module.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
+	
+	@JsonView(JsonViews.ModuleAvecMatiereEtFormationEtFormateur.class)
+	@PostMapping("/matiere/formation/formateur")
+	public ResponseEntity<Void> insertModuleAvecMatiereEtFormationEtFormateur(@Valid @RequestBody Module module, BindingResult br,
+			UriComponentsBuilder uCB) {
+		if (br.hasErrors()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		daoModule.save(module);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(uCB.path("/rest/module/{id}").buildAndExpand(module.getId()).toUri());
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+	}
 
 	// --- UPDATE ---
 
