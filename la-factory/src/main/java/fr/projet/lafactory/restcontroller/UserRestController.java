@@ -66,7 +66,6 @@ public class UserRestController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-
 //CREATE pour: 
 
 	// Ajout formateur:
@@ -186,7 +185,6 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
 
 		// sauvegarde en BDD mais mdp non encrypté
 		daoAdministrateur.save(administrateur);
@@ -354,7 +352,18 @@ public class UserRestController {
 			if (opt.isPresent()) {
 				gestionnaire.setVersion(opt.get().getVersion());
 				gestionnaire.setId(id);
+
+				// sauvegarde en BDD mais mdp non encrypté
 				daoGestionnaire.save(gestionnaire);
+
+				// on le recup via la dao, on encrypte le mdp
+				Gestionnaire gBdd = daoGestionnaire.findById(gestionnaire.getId()).get();
+
+				// encrypte le mdp avant de sauvegarder dans la base
+				gBdd.setMotDePasse(passwordEncoder.encode(gestionnaire.getMotDePasse()));
+				// on sauvegarde ds la base avec le mdp encrypté...normalement
+				daoGestionnaire.save(gBdd);
+
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -372,7 +381,18 @@ public class UserRestController {
 			if (opt.isPresent()) {
 				stagiaire.setVersion(opt.get().getVersion());
 				stagiaire.setId(id);
+
+				// sauvegarde en BDD mais mdp non encrypté
 				daoStagiaire.save(stagiaire);
+
+				// on le recup via la dao, on encrypte le mdp
+				Stagiaire sBdd = daoStagiaire.findById(stagiaire.getId()).get();
+
+				// encrypte le mdp avant de sauvegarder dans la base
+				sBdd.setMotDePasse(passwordEncoder.encode(stagiaire.getMotDePasse()));
+				// on sauvegarde ds la base avec le mdp encrypté...normalement
+				daoStagiaire.save(sBdd);
+
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -390,7 +410,19 @@ public class UserRestController {
 			if (opt.isPresent()) {
 				technicien.setVersion(opt.get().getVersion());
 				technicien.setId(id);
+				
+				// sauvegarde en BDD mais mdp non encrypté
 				daoTechnicien.save(technicien);
+
+				// on le recup via la dao, on encrypte le mdp
+				Technicien tBdd = daoTechnicien.findById(technicien.getId()).get();
+
+				// encrypte le mdp avant de sauvegarder dans la base
+				tBdd.setMotDePasse(passwordEncoder.encode(technicien.getMotDePasse()));
+				// on sauvegarde ds la base avec le mdp encrypté...normalement
+				daoTechnicien.save(tBdd);
+				
+				
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -408,7 +440,18 @@ public class UserRestController {
 			if (opt.isPresent()) {
 				administrateur.setVersion(opt.get().getVersion());
 				administrateur.setId(id);
+				
+				// sauvegarde en BDD mais mdp non encrypté
 				daoAdministrateur.save(administrateur);
+
+				// on le recup via la dao, on encrypte le mdp
+				Administrateur aBdd = daoAdministrateur.findById(administrateur.getId()).get();
+
+				// encrypte le mdp avant de sauvegarder dans la base
+				aBdd.setMotDePasse(passwordEncoder.encode(administrateur.getMotDePasse()));
+				// on sauvegarde ds la base avec le mdp encrypté...normalement
+				daoAdministrateur.save(aBdd);
+				
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
