@@ -39,17 +39,17 @@ public class Module {
 	@Version
 	private int version;
 
-	@JsonView(JsonViews.ModuleAvecMatiere.class)
+	@JsonView(JsonViews.Module.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_MATIERE_ID", nullable = true)
 	private Matiere matiere;
 
-	@JsonView(JsonViews.ModuleAvecFormateur.class)
+	@JsonView(JsonViews.Module.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;
 
-	@JsonView(JsonViews.ModuleAvecFormation.class)
+	@JsonView(JsonViews.Module.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATION_ID", nullable = true)
 	private Formation formation;
