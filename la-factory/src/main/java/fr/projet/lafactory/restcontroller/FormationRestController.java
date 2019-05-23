@@ -62,7 +62,7 @@ public class FormationRestController {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(FormationAvecSalle.class)
+	@JsonView(JsonViews.FormationAvecSalle.class)
 	@GetMapping("/salle")
 	public List<Formation> findAllFormationSalle() {
 		return daoFormation.findAll();
