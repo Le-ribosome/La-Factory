@@ -22,7 +22,7 @@ public class Materiel {
 	@Version
 	private int version;
 	
-	@JsonView({JsonViews.Materiel.class, JsonViews.Stagiaire.class})
+	@JsonView(JsonViews.Materiel.class)
 	private String code = "MAT";
 	
 	@JsonView(JsonViews.Materiel.class)
