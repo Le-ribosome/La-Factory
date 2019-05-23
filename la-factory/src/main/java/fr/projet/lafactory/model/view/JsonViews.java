@@ -73,7 +73,7 @@ public class JsonViews {
 	public static interface FormationAvecGestionnaire extends Formation {
 	}
 	
-	public static interface FormationAvecModule extends Formation {
+	public static interface FormationAvecModule extends Formation, Module {
 	}
 	
 	public static interface FormationAvecStagiaire extends Formation, Stagiaire {
