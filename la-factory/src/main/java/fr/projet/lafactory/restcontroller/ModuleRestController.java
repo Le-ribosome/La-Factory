@@ -41,7 +41,7 @@ public class ModuleRestController {
 	private IDAOFormation daoFormation;
 
 	// --- READ ---
-	@JsonView(JsonViews.User.class)
+	@JsonView(JsonViews.Module.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Module>> findAll() {
 		return new ResponseEntity<List<Module>>(daoModule.findAll(), HttpStatus.OK);
