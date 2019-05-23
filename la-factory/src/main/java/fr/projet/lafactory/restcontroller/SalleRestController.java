@@ -43,6 +43,7 @@ public class SalleRestController {
 	}
 
 	// -- By ID ---
+	@JsonView(JsonViews.SalleAvecVideoprojecteur.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Salle> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Salle> opt = daoSalle.findById(id);
