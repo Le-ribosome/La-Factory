@@ -62,19 +62,7 @@ public class FormationRestController {
 	public List<Formation> findAllFormationGestionnaire() {
 		return daoFormation.findAll();
 	}
-
-	// By titre
-
-	@GetMapping("/{titre}")
-	public ResponseEntity<Formation> findByTitre(@PathVariable(name = "titre") String titre) {
-		Optional<Formation> opt = daoFormation.findFormationByTitre(titre);
-		if (opt.isPresent()) {
-			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
+	
 	// --- By ID ---
 	@GetMapping("/{id}")
 	public ResponseEntity<Formation> findById(@PathVariable(name = "id") Integer id) {

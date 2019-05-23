@@ -23,6 +23,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 @Table(name = "Module")
 public class Module {
 
+	@JsonView(JsonViews.Module.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MOD_ID")
