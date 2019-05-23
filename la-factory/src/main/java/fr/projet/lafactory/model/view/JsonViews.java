@@ -4,7 +4,7 @@ public class JsonViews {
 
 	// --- RH ---
 
-	public static class User extends Materiel{
+	public static interface User {
 	}
 
 	public static interface Gestionnaire extends User{
