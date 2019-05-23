@@ -27,11 +27,13 @@ public class ApplicationServiceConsole implements CommandLineRunner { // pour av
 //	private IDAOPersonne daoPersonne;
 //	@Autowired
 //	private IDAOPersonneDroit daoPersonneDroit;
-//	@Autowired
-//	private PasswordEncoder pass;
-//	@Autowired
+	@Autowired
+	private PasswordEncoder pass;
 	
-//	private IDAOFormateur daoFormateur;
+	
+	
+	@Autowired
+	private IDAOFormateur daoFormateur;
 //	@Autowired
 //	private IDAOVideoprojecteur daoVideoprojecteur;
 //	@Autowired
@@ -161,6 +163,29 @@ public class ApplicationServiceConsole implements CommandLineRunner { // pour av
 //		Utilisateur u = daoUtilisateur.findById("karen").get();
 //		u.setPassword(pass.encode("wallpaper"));
 //		daoUtilisateur.save(u);
+		
+		
+		// test encrypt mdp lors creation 
+//		String mdp = "d";
+//		String mdpencr = "e";
+//		System.out.println(mdp);
+//		System.out.println(mdpencr);
+//		Formateur f = daoFormateur.findById(79).get();
+//		mdp = f.getMotDePasse();
+//		
+//		f.setMotDePasse(pass.encode(f.getMotDePasse()));
+//		mdpencr = f.getMotDePasse();
+//		 //daoFormateur.save(f);
+//		System.out.println("encrypt");
+//		System.out.println(mdp);
+//		System.out.println(mdpencr);
+//
+//		
+//		daoFormateur.save(f);
+//		System.out.println("encrypt");
+//		System.out.println(mdp);
+//		System.out.println(mdpencr);
+
 		
 	}
 	
