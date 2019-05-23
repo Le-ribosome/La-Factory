@@ -13,7 +13,7 @@ import fr.projet.lafactory.model.view.JsonViews;
 @MappedSuperclass
 public class Materiel {
 
-	@JsonView(JsonViews.Materiel.class)
+	@JsonView({JsonViews.Materiel.class , JsonViews.Stagiaire.class})
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,7 +22,7 @@ public class Materiel {
 	@Version
 	private int version;
 	
-	@JsonView(JsonViews.Materiel.class)
+	@JsonView({JsonViews.Materiel.class, JsonViews.Stagiaire.class})
 	private String code = "MAT";
 	
 	@JsonView(JsonViews.Materiel.class)
