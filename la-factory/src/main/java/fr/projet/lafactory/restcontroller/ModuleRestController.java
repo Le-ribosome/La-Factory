@@ -97,6 +97,7 @@ public class ModuleRestController {
 	
 	
 	// --- By ID ---
+	@JsonView(JsonViews.Module.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Module> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Module> opt = daoModule.findById(id);
