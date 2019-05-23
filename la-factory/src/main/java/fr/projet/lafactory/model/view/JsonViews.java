@@ -76,7 +76,7 @@ public class JsonViews {
 	public static interface FormationAvecModule extends Formation {
 	}
 	
-	public static interface FormationAvecStagiaire extends Formation {
+	public static interface FormationAvecStagiaire extends Formation, Stagiaire {
 	}
 	
 	public static interface Indisponibilite{

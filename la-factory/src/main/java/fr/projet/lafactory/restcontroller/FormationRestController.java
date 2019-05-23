@@ -45,19 +45,25 @@ public class FormationRestController {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
 	}
 
+	@JsonView(JsonViews.FormationAvecStagiaire.class)
+	@GetMapping(value = "/stagiaires")
+	public ResponseEntity<List<Formation>> findAllWithStagiaires() {
+		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
+	}
+
 	@JsonView(FormationAvecSalle.class)
 	@GetMapping("/salle")
 	public List<Formation> findAllFormationSalle() {
 		return daoFormation.findAll();
 	}
-	
+
 	@JsonView(JsonViews.FormationAvecGestionnaire.class)
 	@GetMapping("/gestionnaire")
 	public List<Formation> findAllFormationGestionnaire() {
 		return daoFormation.findAll();
 	}
-	
-	//By titre
+
+	// By titre
 
 	@GetMapping("/{titre}")
 	public ResponseEntity<Formation> findByTitre(@PathVariable(name = "titre") String titre) {
@@ -68,8 +74,7 @@ public class FormationRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	
+
 	// --- By ID ---
 	@GetMapping("/{id}")
 	public ResponseEntity<Formation> findById(@PathVariable(name = "id") Integer id) {
@@ -84,8 +89,8 @@ public class FormationRestController {
 	// -- By ID avec Gestionnaire --
 
 	@JsonView(JsonViews.FormationAvecGestionnaire.class)
-		@GetMapping("/{id}/gestionnaire")
-		public ResponseEntity<Formation> findByIdWithGestionnaire(@PathVariable(name="id") Integer id) {
+	@GetMapping("/{id}/gestionnaire")
+	public ResponseEntity<Formation> findByIdWithGestionnaire(@PathVariable(name = "id") Integer id) {
 		Optional<Formation> opt = daoFormation.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
@@ -98,13 +103,13 @@ public class FormationRestController {
 
 	@JsonView(JsonViews.FormationAvecSalle.class)
 	@GetMapping("/{id}/salle")
-	public ResponseEntity<Formation> findByIdWithSalle(@PathVariable(name="id") Integer id) {
-	Optional<Formation> opt = daoFormation.findById(id);
-	if (opt.isPresent()) {
-		return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
-	} else {
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+	public ResponseEntity<Formation> findByIdWithSalle(@PathVariable(name = "id") Integer id) {
+		Optional<Formation> opt = daoFormation.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	// --- CREATE ---
@@ -118,9 +123,9 @@ public class FormationRestController {
 		}
 		daoFormation.save(formation);
 		HttpHeaders headers = new HttpHeaders();
-		List<String> chaine=new ArrayList<String>();
+		List<String> chaine = new ArrayList<String>();
 		chaine.add("*");
-		headers.setAccessControlAllowHeaders( chaine);
+		headers.setAccessControlAllowHeaders(chaine);
 		headers.setAccessControlExposeHeaders(chaine);
 		headers.setLocation(uCB.path("/rest/formation/{id}").buildAndExpand(formation.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
