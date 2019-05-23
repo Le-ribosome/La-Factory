@@ -98,13 +98,13 @@ public class JsonViews {
 	public static interface Module {
 	}
 
-	public static interface ModuleAvecFormation extends Module {
+	public static interface ModuleAvecFormation extends Module, Formation {
 	}
 
-	public static interface ModuleAvecFormateur extends Module {
+	public static interface ModuleAvecFormateur extends Module, Formateur {
 	}
 
-	public static interface ModuleAvecMatiere extends Module {
+	public static interface ModuleAvecMatiere extends Module, Matiere {
 	}
 
 }

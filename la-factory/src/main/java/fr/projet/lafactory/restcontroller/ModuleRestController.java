@@ -47,11 +47,11 @@ public class ModuleRestController {
 		return new ResponseEntity<List<Module>>(daoModule.findAll(), HttpStatus.OK);
 	}
 
-//	@JsonView(JsonViews.ModuleAvecMatiere.class)
-//	@GetMapping("/matiere")
-//	public List<Module> findAllModuleMatiere() {
-//		return daoModule.findAll();
-//	}
+	@JsonView(JsonViews.ModuleAvecMatiere.class)
+	@GetMapping("/matiere")
+	public List<Module> findAllModuleMatiere() {
+		return daoModule.findAll();
+	}
 //	
 //	@JsonView(JsonViews.ModuleAvecFormateur.class)
 //	@GetMapping("/formateur")
@@ -136,16 +136,16 @@ public class ModuleRestController {
 //
 //	// -- By ID avec Matiere --
 //
-//	@JsonView(JsonViews.ModuleAvecMatiere.class)
-//	@GetMapping("/{id}/matiere")
-//	public ResponseEntity<Module> findByIdWithMatiere(@PathVariable(name="id") Integer id) {
-//	Optional<Module> opt = daoModule.findById(id);
-//	if (opt.isPresent()) {
-//		return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
-//	} else {
-//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	}
-//	}
+	@JsonView(JsonViews.ModuleAvecMatiere.class)
+	@GetMapping("/{id}/matiere")
+	public ResponseEntity<Module> findByIdWithMatiere(@PathVariable(name="id") Integer id) {
+	Optional<Module> opt = daoModule.findById(id);
+	if (opt.isPresent()) {
+		return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	}
 
 	// --- CREATE ---
 
