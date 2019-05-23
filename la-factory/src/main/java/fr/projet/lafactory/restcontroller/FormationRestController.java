@@ -1,5 +1,6 @@
 package fr.projet.lafactory.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,7 +56,20 @@ public class FormationRestController {
 	public List<Formation> findAllFormationGestionnaire() {
 		return daoFormation.findAll();
 	}
+	
+	//By titre
 
+	@GetMapping("/{titre}")
+	public ResponseEntity<Formation> findByTitre(@PathVariable(name = "titre") String titre) {
+		Optional<Formation> opt = daoFormation.findFormationByTitre(titre);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
 	// --- By ID ---
 	@GetMapping("/{id}")
 	public ResponseEntity<Formation> findById(@PathVariable(name = "id") Integer id) {
@@ -103,6 +118,10 @@ public class FormationRestController {
 		}
 		daoFormation.save(formation);
 		HttpHeaders headers = new HttpHeaders();
+		List<String> chaine=new ArrayList<String>();
+		chaine.add("*");
+		headers.setAccessControlAllowHeaders( chaine);
+		headers.setAccessControlExposeHeaders(chaine);
 		headers.setLocation(uCB.path("/rest/formation/{id}").buildAndExpand(formation.getId()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}

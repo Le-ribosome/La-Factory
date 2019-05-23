@@ -37,12 +37,13 @@ public class SalleRestController {
 
 	// --- READ ---
 	@GetMapping(value = { "", "/" })
-	@JsonView(JsonViews.Salle.class)
+	@JsonView(JsonViews.SalleAvecVideoprojecteur.class)
 	public ResponseEntity<List<Salle>> findAll() {
 		return new ResponseEntity<List<Salle>>(daoSalle.findAll(), HttpStatus.OK);
 	}
 
 	// -- By ID ---
+	@JsonView(JsonViews.SalleAvecVideoprojecteur.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Salle> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Salle> opt = daoSalle.findById(id);

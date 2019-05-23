@@ -43,6 +43,12 @@ public class VideoprojecteurRestController {
 		return new ResponseEntity<List<Videoprojecteur>>(daoVideoprojecteur.findAll(), HttpStatus.OK);
 	}
 
+	@GetMapping(value = { "/libre" })
+	@JsonView(JsonViews.Videoprojecteur.class)
+	public ResponseEntity<List<Videoprojecteur>> findAllSansSalle() {
+		return new ResponseEntity<List<Videoprojecteur>>(daoVideoprojecteur.findAllSansSalle(), HttpStatus.OK);
+	}
+	
 	// -- By ID ---
 	@JsonView(JsonViews.Videoprojecteur.class)
 	@GetMapping("/{id}")

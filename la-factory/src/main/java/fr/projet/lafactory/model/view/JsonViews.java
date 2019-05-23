@@ -18,6 +18,9 @@ public class JsonViews {
 
 	public static class Technicien extends User{
 	}
+	
+	public static class Administrateur extends User{
+	}
 
 	// --- Materiel ---
 

@@ -1,6 +1,5 @@
 package fr.projet.lafactory.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,16 +24,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.projet.lafactory.dao.IDAOAdministrateur;
 import fr.projet.lafactory.dao.IDAOFormateur;
 import fr.projet.lafactory.dao.IDAOGestionnaire;
 import fr.projet.lafactory.dao.IDAOPersonne;
 import fr.projet.lafactory.dao.IDAOStagiaire;
 import fr.projet.lafactory.dao.IDAOTechnicien;
-import fr.projet.lafactory.model.Droit;
+import fr.projet.lafactory.model.Administrateur;
 import fr.projet.lafactory.model.Formateur;
 import fr.projet.lafactory.model.Gestionnaire;
 import fr.projet.lafactory.model.Personne;
-import fr.projet.lafactory.model.PersonneDroit;
 import fr.projet.lafactory.model.Stagiaire;
 import fr.projet.lafactory.model.Technicien;
 import fr.projet.lafactory.model.view.JsonViews;
@@ -58,6 +58,15 @@ public class UserRestController {
 	@Autowired
 	private IDAOTechnicien daoTechnicien;
 	
+	@Autowired
+	private IDAOAdministrateur daoAdministrateur;
+	
+	// les mots de passe seront encodés dès création d'une personne (formateur, stagiaire, etc.)
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	// passwordEncoder.encode(user.getUsername();
+	
 //CREATE pour: 
 	
 	// Ajout formateur:
@@ -67,7 +76,19 @@ public class UserRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		
+		// sauvegarde en BDD du formateur mais mdp non encrypté
 		daoFormateur.save(formateur);
+		
+		// on recup un formateur via la dao, on encrypte le mdp
+		Formateur fBdd = daoFormateur.findById(formateur.getId()).get();
+		
+		// encrypte le mdp avant de sauvegarder dans la base
+		fBdd.setMotDePasse(passwordEncoder.encode(formateur.getMotDePasse()));
+		// on sauvegarde ds la base avec le mdp encrypté...normalement
+		daoFormateur.save(fBdd);
+		
+		
 // Test pour ajouter les droits au formateur		
 //			daoFormateur.save(formateur);
 //			PersonneDroit personneDroit = new PersonneDroit();
@@ -125,6 +146,21 @@ public class UserRestController {
 		headers.setLocation(uCB.path("/rest/technicien/{id}").buildAndExpand(technicien.getId()).toUri());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+	
+	// Ajout administrateur:
+		@PostMapping(value = { "/administrateur" })
+		public ResponseEntity<Void> insert(@Valid @RequestBody Administrateur administrateur, BindingResult br,
+				UriComponentsBuilder uCB) {
+			if (br.hasErrors()) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			daoAdministrateur.save(administrateur);
+			// Ça nous donne une uri, important car dans une reponse on a un body mais aussi
+			// un header
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(uCB.path("/rest/administrateur/{id}").buildAndExpand(administrateur.getId()).toUri());
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
 
 //	READ pour:
 	
@@ -218,6 +254,25 @@ public class UserRestController {
 		}
 	}
 
+	//Administrateur
+		@JsonView(JsonViews.Administrateur.class)
+		@GetMapping(value = {"/administrateurs"})
+		public ResponseEntity<List<Administrateur>> findAllAdministrateurs() {
+			return new ResponseEntity<List<Administrateur>>(daoAdministrateur.findAll(), HttpStatus.OK);
+		}
+		
+		@JsonView(JsonViews.Administrateur.class)
+		@GetMapping("/administrateur/{id}")
+		public ResponseEntity<Administrateur> findAdministrateurById(@PathVariable(name="id") Integer id){
+			Optional<Administrateur> opt = daoAdministrateur.findById(id);
+			if (opt.isPresent()) {
+				return new ResponseEntity<Administrateur>(opt.get(), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		}
+	
 //UPDATE pour: 
 	
 	@PutMapping("/formateur/{id}")
@@ -229,7 +284,19 @@ public class UserRestController {
             if(opt.isPresent()) {
                 formateur.setVersion(opt.get().getVersion());
                 formateur.setId(id);
+                
+                
+             // sauvegarde en BDD du formateur mais mdp non encrypté
                 daoFormateur.save(formateur);
+                
+                // on recup un formateur via la dao, on encrypte le mdp
+                Formateur fBdd = daoFormateur.findById(formateur.getId()).get();
+                
+                // encrypte le mdp avant de sauvegarder dans la base
+                fBdd.setMotDePasse(passwordEncoder.encode(formateur.getMotDePasse()));
+                // on sauvegarde ds la base avec le mdp encrypté...normalement
+                daoFormateur.save(fBdd);
+                
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -288,6 +355,23 @@ public class UserRestController {
         }    
     }
 	
+	@PutMapping("/administrateur/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name="id") Integer id, @Valid @RequestBody Administrateur administrateur, BindingResult br) {
+        if (br.hasErrors()){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } else {
+            Optional<Administrateur> opt = daoAdministrateur.findById(id);
+            if(opt.isPresent()) {
+            	administrateur.setVersion(opt.get().getVersion());
+            	administrateur.setId(id);
+                daoAdministrateur.save(administrateur);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }    
+    }
+	
 	
 	@DeleteMapping("/formateur/{id}")
 	public ResponseEntity<Void> deleteFormateur(@PathVariable(name="id") Integer id){
@@ -338,4 +422,18 @@ public class UserRestController {
 		}
 	}
 
+	
+	@DeleteMapping("/administrateur/{id}")
+	public ResponseEntity<Void> deleteAdministrateur(@PathVariable(name="id") Integer id){
+		Optional<Administrateur> opt = daoAdministrateur.findById(id);
+		if (opt.isPresent()) {
+			daoAdministrateur.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	
 }

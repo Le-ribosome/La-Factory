@@ -6,4 +6,6 @@ import fr.projet.lafactory.model.Salle;
 
 public interface IDAOSalle extends JpaRepository<Salle, Integer> {
 
+
+	
 }
