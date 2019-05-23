@@ -7,7 +7,7 @@ public class JsonViews {
 	public static interface User {
 	}
 
-	public static interface Gestionnaire extends User{
+	public static interface Gestionnaire extends User, Formation{
 	}
 
 	public static interface Formateur extends User{
@@ -33,7 +33,7 @@ public class JsonViews {
 	public static interface Ordinateur extends Materiel {
 	}
 
-	public static interface OrdinateurAvecStagiaire extends Materiel {
+	public static interface OrdinateurAvecStagiaire extends Ordinateur {
 	}
 
 	public static interface Salle extends Materiel {
