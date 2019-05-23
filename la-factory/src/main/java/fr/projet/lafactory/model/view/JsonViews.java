@@ -3,8 +3,8 @@ package fr.projet.lafactory.model.view;
 public class JsonViews {
 
 	// --- RH ---
-	
-	public static interface User {
+
+	public static class User extends Materiel{
 	}
 
 	public static interface Gestionnaire extends User{
