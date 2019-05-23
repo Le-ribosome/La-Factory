@@ -56,6 +56,7 @@ public class FormationRestController {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
 	}
 	
+	
 //	@JsonView(JsonViews.FormationAvecModuleEtSalle.class)
 //	@GetMapping(value = "/modules/salle")
 //	public ResponseEntity<List<Formation>> findAllWithModulesEtSalle() {
@@ -112,6 +113,20 @@ public class FormationRestController {
 		}
 	}
 
+	// -- By ID avec module --
+
+		@JsonView(JsonViews.FormationAvecModule.class)
+		@GetMapping("/{id}/modules")
+		public ResponseEntity<Formation> findByIdWithModule(@PathVariable(name = "id") Integer id) {
+			Optional<Formation> opt = daoFormation.findById(id);
+			if (opt.isPresent()) {
+				return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		}
+
+		
 	// --- CREATE ---
 
 	@JsonView(JsonViews.Formation.class)

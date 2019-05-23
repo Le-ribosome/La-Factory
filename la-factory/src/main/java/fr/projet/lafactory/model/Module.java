@@ -44,7 +44,7 @@ public class Module {
 	@JoinColumn(name = "MOD_MATIERE_ID", nullable = true)
 	private Matiere matiere;
 
-	@JsonView(JsonViews.Module.class)
+	@JsonView(JsonViews.ModuleAvecFormateur.class)
 	@ManyToOne()
 	@JoinColumn(name = "MOD_FORMATEUR_ID", nullable = true)
 	private Formateur formateur;
