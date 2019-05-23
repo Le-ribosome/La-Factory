@@ -28,7 +28,7 @@ public class JsonViews {
 	public static class Ordinateur extends Materiel {
 	}
 
-	public static class OrdinateurAvecStagiaire extends Materiel {
+	public static class OrdinateurAvecStagiaire extends Ordinateur {
 	}
 
 	public static class Salle extends Materiel {
