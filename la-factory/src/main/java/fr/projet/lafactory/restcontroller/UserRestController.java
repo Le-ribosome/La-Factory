@@ -284,7 +284,19 @@ public class UserRestController {
             if(opt.isPresent()) {
                 formateur.setVersion(opt.get().getVersion());
                 formateur.setId(id);
+                
+                
+             // sauvegarde en BDD du formateur mais mdp non encrypté
                 daoFormateur.save(formateur);
+                
+                // on recup un formateur via la dao, on encrypte le mdp
+                Formateur fBdd = daoFormateur.findById(formateur.getId()).get();
+                
+                // encrypte le mdp avant de sauvegarder dans la base
+                fBdd.setMotDePasse(passwordEncoder.encode(formateur.getMotDePasse()));
+                // on sauvegarde ds la base avec le mdp encrypté...normalement
+                daoFormateur.save(fBdd);
+                
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
