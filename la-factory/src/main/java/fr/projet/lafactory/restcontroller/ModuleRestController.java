@@ -52,6 +52,12 @@ public class ModuleRestController {
 	public List<Module> findAllModuleMatiere() {
 		return daoModule.findAll();
 	}
+	
+	@JsonView(JsonViews.ModuleAvecMatiereEtFormationEtFormateur.class)
+	@GetMapping("/matiere/formation/formateur")
+	public List<Module> findAllModuleAvecMatiereEtFormationEtFormateur() {
+		return daoModule.findAll();
+	}
 //	
 //	@JsonView(JsonViews.ModuleAvecFormateur.class)
 //	@GetMapping("/formateur")
@@ -146,6 +152,19 @@ public class ModuleRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	}
+	
+	@JsonView(JsonViews.ModuleAvecMatiereEtFormationEtFormateur.class)
+	@GetMapping("/{id}/matiere/formation/formateur")
+	public ResponseEntity<Module> findByIdWithModuleAvecMatiereEtFormationEtFormateur(@PathVariable(name="id") Integer id) {
+	Optional<Module> opt = daoModule.findById(id);
+	if (opt.isPresent()) {
+		return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	}
+	
+	
 
 	// --- CREATE ---
 

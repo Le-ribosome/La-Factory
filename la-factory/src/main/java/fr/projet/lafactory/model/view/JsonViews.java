@@ -106,5 +106,8 @@ public class JsonViews {
 
 	public static interface ModuleAvecMatiere extends Module, Matiere {
 	}
+	
+	public static interface ModuleAvecMatiereEtFormationEtFormateur extends ModuleAvecFormation, ModuleAvecFormateur, ModuleAvecMatiere {
+	}
 
 }
