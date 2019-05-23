@@ -55,7 +55,13 @@ public class FormationRestController {
 	public ResponseEntity<List<Formation>> findAllWithModules() {
 		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
 	}
-	
+
+	@JsonView(JsonViews.FormationAvecModuleEtSalle.class)
+	@GetMapping(value = "/modules/salle")
+	public ResponseEntity<List<Formation>> findAllWithModulesEtSalle() {
+		return new ResponseEntity<List<Formation>>(daoFormation.findAll(), HttpStatus.OK);
+	}
+
 	@JsonView(JsonViews.FormationAvecSalle.class)
 	@GetMapping("/salle")
 	public List<Formation> findAllFormationSalle() {
@@ -67,7 +73,7 @@ public class FormationRestController {
 	public List<Formation> findAllFormationGestionnaire() {
 		return daoFormation.findAll();
 	}
-	
+
 	// --- By ID ---
 	@JsonView(JsonViews.Formation.class)
 	@GetMapping("/{id}")
@@ -98,6 +104,32 @@ public class FormationRestController {
 	@JsonView(JsonViews.FormationAvecSalle.class)
 	@GetMapping("/{id}/salle")
 	public ResponseEntity<Formation> findByIdWithSalle(@PathVariable(name = "id") Integer id) {
+		Optional<Formation> opt = daoFormation.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// -- By ID avec module --
+
+	@JsonView(JsonViews.FormationAvecModule.class)
+	@GetMapping("/{id}/modules")
+	public ResponseEntity<Formation> findByIdWithModule(@PathVariable(name = "id") Integer id) {
+		Optional<Formation> opt = daoFormation.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// -- By ID avec module et salle --
+
+	@JsonView(JsonViews.FormationAvecModuleEtSalle.class)
+	@GetMapping("/{id}/modules/salle")
+	public ResponseEntity<Formation> findByIdWithModuleEtSalle(@PathVariable(name = "id") Integer id) {
 		Optional<Formation> opt = daoFormation.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Formation>(opt.get(), HttpStatus.OK);
